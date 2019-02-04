@@ -11,7 +11,8 @@ export const handleLogin = (user, path) => {
       body: JSON.stringify({
         user: {
           username: user.username,
-          password: user.password
+          password: user.password,
+          client: user.client
         }
       })
     });

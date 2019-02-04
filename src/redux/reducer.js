@@ -27,7 +27,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case "SET_USER":
-      console.log("i'm being reached", action.payload);
       return {
         ...state,
         currentUser: action.payload

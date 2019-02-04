@@ -9,7 +9,8 @@ import HomePage from "./components/HomePage";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
-import { setCoaches } from "./actions/coachActions";
+
+import CoachContainer from "./components/CoachContainer";
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,8 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(data => this.props.handleReload(data.user));
+
+      this.props.handleCoachReload();
     }
   }
 
@@ -53,13 +56,16 @@ class App extends Component {
           <Route
             path="/login"
             render={() => {
-              return (
+              return localStorage.getItem("token") ? (
+                <Redirect to="/profile" />
+              ) : (
                 <div className="ui one column stackable center aligned page grid signUp">
                   <LoginForm />
                 </div>
               );
             }}
           />
+          <Route path="/coaches" component={CoachContainer} />
           <Route path="/" component={HomePage} />
         </Switch>
       </div>
@@ -74,11 +80,7 @@ const mapDispatchToProps = dispatch => {
     },
 
     handleCoachReload: () => {
-      dispatch(
-        getCoaches()
-          .then(res => res.json())
-          .then(coaches => setCoaches(coaches))
-      );
+      dispatch(getCoaches());
     }
   };
 };

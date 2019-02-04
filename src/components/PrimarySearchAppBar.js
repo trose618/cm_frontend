@@ -20,6 +20,8 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { withRouter } from "react-router-dom";
+
 const styles = theme => ({
   root: {
     width: "100%"
@@ -122,7 +124,17 @@ class PrimarySearchAppBar extends React.Component {
 
   handleCoaches = () => {
     this.setState({ anchorEl: null }, () => {
-      alert("render coaches");
+      this.setState({ mobileMoreAnchorEl: null }, () => {
+        this.props.history.push("/coaches");
+      });
+    });
+  };
+
+  handleProfile = () => {
+    this.setState({ anchorEl: null }, () => {
+      this.setState({ mobileMoreAnchorEl: null }, () => {
+        this.props.history.push("/profile");
+      });
     });
   };
 
@@ -142,26 +154,26 @@ class PrimarySearchAppBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
         <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
+        <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
       </Menu>
     );
 
-    const renderLeftMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isLeftMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-      </Menu>
-    );
+    // const renderLeftMenu = (
+    //   <Menu
+    //     anchorEl={anchorEl}
+    //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+    //     open={isLeftMenuOpen}
+    //     onClose={this.handleMenuClose}
+    //   >
+    //     <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+    //     <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+    //     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+    //   </Menu>
+    // );
 
     const renderMobileMenu = (
       <Menu
@@ -259,19 +271,26 @@ class PrimarySearchAppBar extends React.Component {
               )}
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton
-                aria-haspopup="true"
-                onClick={this.handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
+              {localStorage.getItem("token") ? (
+                <IconButton
+                  aria-haspopup="true"
+                  onClick={this.handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              ) : (
+                <Fragment>
+                  <Link to={"/signUp"}>Sign Up</Link>
+                  <Link to={"/login"}>Login</Link>
+                </Fragment>
+              )}
             </div>
           </Toolbar>
         </AppBar>
         {renderMenu}
         {renderMobileMenu}
-        {renderLeftMenu}
+        {/* {renderLeftMenu} */}
       </div>
     );
   }
@@ -291,7 +310,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(PrimarySearchAppBar));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(PrimarySearchAppBar))
+);
