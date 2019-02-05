@@ -1,16 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import CoachCard from "./CoachCard";
+import MaterialCoachCard from "./MaterialCoachCard";
 
 class CoachContainer extends React.Component {
   displayCoaches = () => {
     return this.props.coaches.map(coach => (
-      <CoachCard key={coach.id} {...coach} />
+      <MaterialCoachCard key={coach.id} coach={coach} />
     ));
   };
 
   render() {
-    return <div>{this.displayCoaches()}</div>;
+    return (
+      <div className="ui grid cards coach-container">
+        {this.displayCoaches()}
+      </div>
+    );
   }
 }
 const mapStateToProps = state => {

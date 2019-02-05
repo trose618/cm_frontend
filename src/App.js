@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
+import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
 
@@ -23,51 +24,71 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(data => this.props.handleReload(data.user));
-
-      this.props.handleCoachReload();
     }
+    this.props.handleCoachReload();
   }
 
   render() {
     return (
       <div className="App">
         <PrimarySearchAppBar />
-        <Switch>
-          <Route
-            path="/signUp"
-            render={() => {
-              return (
-                <div className="ui one column stackable center aligned page grid signUp">
-                  <SignUpForm handleSubmit={this.handleSubmit} />
-                </div>
-              );
-            }}
-          />
-          <Route
-            path="/profile"
-            render={() => {
-              return localStorage.getItem("token") ? (
-                <UserProfile />
-              ) : (
-                <Redirect to="/login" />
-              );
-            }}
-          />
-          <Route
-            path="/login"
-            render={() => {
-              return localStorage.getItem("token") ? (
-                <Redirect to="/profile" />
-              ) : (
-                <div className="ui one column stackable center aligned page grid signUp">
-                  <LoginForm />
-                </div>
-              );
-            }}
-          />
-          <Route path="/coaches" component={CoachContainer} />
-          <Route path="/" component={HomePage} />
-        </Switch>
+        <div className="main-display-div">
+          <Switch>
+            <Route
+              path="/signUp"
+              render={() => {
+                return (
+                  <div className="ui one column stackable center aligned page grid signUp">
+                    <SignUpForm handleSubmit={this.handleSubmit} />
+                  </div>
+                );
+              }}
+            />
+            <Route
+              path="/profile"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <UserProfile />
+                ) : (
+                  <Redirect to="/login" />
+                );
+              }}
+            />
+            <Route
+              path="/login"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <Redirect to="/profile" />
+                ) : (
+                  <div className="ui one column stackable center aligned page grid signUp">
+                    <LoginForm />
+                  </div>
+                );
+              }}
+            />
+            <Route
+              path="/coachProfile"
+              render={() => {
+                return this.props.selected_coach ? (
+                  <CoachSearchProfile />
+                ) : (
+                  <Redirect to="/login" />
+                );
+              }}
+            />
+            <Route
+              path="/coaches"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <CoachContainer />
+                ) : (
+                  <Redirect to="/login" />
+                );
+              }}
+            />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </div>
       </div>
     );
   }

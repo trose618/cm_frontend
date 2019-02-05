@@ -7,3 +7,8 @@ export const setCurrentUser = userInfo => ({
   type: "SET_USER",
   payload: userInfo
 });
+
+export const selectCoach = coachInfo => ({
+  type: "SET_SELECTED_COACH",
+  payload: coachInfo
+});

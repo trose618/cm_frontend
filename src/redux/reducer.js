@@ -1,6 +1,11 @@
 const initialState = {
-  currentUser: { username: "", password: "" },
-  coaches: []
+  currentUser: {
+    username: "",
+    password: "",
+    image_url: ""
+  },
+  coaches: [],
+  selected_coach: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +26,8 @@ const reducer = (state = initialState, action) => {
       localStorage.removeItem("token");
       return {
         ...state,
-        currentUser: { username: "test", password: "test" }
+        currentUser: { username: "", password: "" },
+        selected_coach: false
         // localStorage.removeItem("token");
         // this.setState({ currentUser: {} }, () => this.props.history.push("/login"));
       };
@@ -36,6 +42,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         coaches: action.payload
+      };
+
+    case "SET_SELECTED_COACH":
+      return {
+        ...state,
+        selected_coach: action.payload
       };
     default:
       return state;

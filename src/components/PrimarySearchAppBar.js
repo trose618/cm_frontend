@@ -140,10 +140,11 @@ class PrimarySearchAppBar extends React.Component {
 
   render() {
     //console.log("props in navBar", this.props);
-    const { anchorEl, LeftAnchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    // LeftAnchorEl ^^
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
-    const isLeftMenuOpen = Boolean(LeftAnchorEl);
+    // const isLeftMenuOpen = Boolean(LeftAnchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const renderMenu = (
