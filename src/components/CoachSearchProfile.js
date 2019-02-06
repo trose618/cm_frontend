@@ -21,7 +21,13 @@ class CoachSearchProfile extends React.Component {
           }
         />
         <br />
-        <LessonModal />
+        <div
+          style={{
+            display: this.props.currentUser.client === true ? "block" : "none"
+          }}
+        >
+          <LessonModal />
+        </div>
       </div>
     );
   }
@@ -29,7 +35,8 @@ class CoachSearchProfile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    coach: state.selected_coach
+    coach: state.selected_coach,
+    currentUser: state.currentUser
   };
 };
 

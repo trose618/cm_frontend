@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { handleLogin } from "../thunks/userThunks";
 import { getLessons } from "../thunks/lessonThunks";
+import { getCoaches } from "../thunks/coachThunks";
 
 class LoginForm extends Component {
   constructor() {
@@ -68,6 +69,7 @@ const mapDispatchToProps = dispatch => {
             localStorage.setItem("token", data.jwt);
             dispatch({ type: "LOGIN_USER", payload: data.user });
             dispatch(getLessons());
+            dispatch(getCoaches());
 
             self.props.history.push("/profile");
           }

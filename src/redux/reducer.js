@@ -1,9 +1,5 @@
 const initialState = {
-  currentUser: {
-    username: "",
-    password: "",
-    image_url: ""
-  },
+  currentUser: false,
   coaches: [],
   lessons: [],
   selected_coach: false
@@ -27,8 +23,10 @@ const reducer = (state = initialState, action) => {
       localStorage.removeItem("token");
       return {
         ...state,
-        currentUser: { username: "", password: "" },
-        selected_coach: false
+        currentUser: false,
+        selected_coach: false,
+        lessons: [],
+        coaches: []
         // localStorage.removeItem("token");
         // this.setState({ currentUser: {} }, () => this.props.history.push("/login"));
       };

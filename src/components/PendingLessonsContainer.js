@@ -24,7 +24,7 @@ const PendingLessonsContainer = props => {
 
   return (
     <div>
-      <h1>Pending Lessons</h1>
+      <h1>{props.currentUser.client ? "Pending Lessons" : "Requests"}</h1>
       <div className="ui grid cards">
         {yourLessons(testingArray).map(lesson => {
           return (
@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   console.log(state);
-  return { lessons: state.lessons };
+  return { lessons: state.lessons, currentUser: state.currentUser };
 };
 
 export default connect(
