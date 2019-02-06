@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
+import { getLessons } from "./thunks/lessonThunks";
 import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
@@ -26,6 +27,7 @@ class App extends Component {
         .then(data => this.props.handleReload(data.user));
     }
     this.props.handleCoachReload();
+    this.props.handleLessonsReload();
   }
 
   render() {
@@ -102,6 +104,10 @@ const mapDispatchToProps = dispatch => {
 
     handleCoachReload: () => {
       dispatch(getCoaches());
+    },
+
+    handleLessonsReload: () => {
+      dispatch(getLessons());
     }
   };
 };

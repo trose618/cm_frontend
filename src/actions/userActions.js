@@ -12,3 +12,10 @@ export const selectCoach = coachInfo => ({
   type: "SET_SELECTED_COACH",
   payload: coachInfo
 });
+
+export const submitLesson = lessonData => {
+  return {
+    type: "NEW_LESSON",
+    payload: lessonData.lesson
+  };
+};

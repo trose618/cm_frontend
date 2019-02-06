@@ -5,6 +5,7 @@ const initialState = {
     image_url: ""
   },
   coaches: [],
+  lessons: [],
   selected_coach: false
 };
 
@@ -31,6 +32,14 @@ const reducer = (state = initialState, action) => {
         // localStorage.removeItem("token");
         // this.setState({ currentUser: {} }, () => this.props.history.push("/login"));
       };
+    case "NEW_LESSON":
+      let newLessons = [...state.lessons];
+      newLessons.push(action.payload);
+      //let updatedLesson = state.lessons.push(action.payload);
+      return {
+        ...state,
+        lessons: newLessons
+      };
 
     case "SET_USER":
       return {
@@ -42,6 +51,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         coaches: action.payload
+      };
+
+    case "SET_LESSONS":
+      return {
+        ...state,
+        lessons: action.payload
       };
 
     case "SET_SELECTED_COACH":
