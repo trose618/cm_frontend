@@ -68,6 +68,10 @@ class SignUpForm extends Component {
           Coach
           <br />
           <input type="submit" value="SignUp" />
+          <br />
+          <a href="https://www.ussquash.com/coach/coach-certification/">
+            Not a certified coach?
+          </a>
         </form>
       </div>
     );

@@ -138,6 +138,10 @@ class PrimarySearchAppBar extends React.Component {
     });
   };
 
+  handlePendingClick = () => {
+    this.props.history.push("/pendingLessons");
+  };
+
   render() {
     //console.log("props in navBar", this.props);
     const { anchorEl, mobileMoreAnchorEl } = this.state;
@@ -146,6 +150,12 @@ class PrimarySearchAppBar extends React.Component {
     const isMenuOpen = Boolean(anchorEl);
     // const isLeftMenuOpen = Boolean(LeftAnchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const pendingLessons = this.props.lessons.filter(lesson => {
+      return lesson.accepted === false;
+    });
+
+    const pendingCount = pendingLessons.length;
 
     const renderMenu = (
       <Menu
@@ -157,7 +167,9 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
+        {this.props.currentUser.client ? (
+          <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
+        ) : null}
         <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
       </Menu>
     );
@@ -192,13 +204,13 @@ class PrimarySearchAppBar extends React.Component {
           </IconButton>
           <p>Messages</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={this.handlePendingClick}>
           <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
+            <Badge badgeContent={pendingCount} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <p>Notifications</p>
+          <p>Pending Requests</p>
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
@@ -246,12 +258,12 @@ class PrimarySearchAppBar extends React.Component {
               {localStorage.getItem("token") ? (
                 <div>
                   <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
+                    <Badge badgeContent={0} color="secondary">
                       <MailIcon />
                     </Badge>
                   </IconButton>
-                  <IconButton color="inherit">
-                    <Badge badgeContent={17} color="secondary">
+                  <IconButton color="inherit" onClick={this.handlePendingClick}>
+                    <Badge badgeContent={pendingCount} color="secondary">
                       <NotificationsIcon />
                     </Badge>
                   </IconButton>
@@ -301,8 +313,9 @@ PrimarySearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = arg => {
-  return arg;
+const mapStateToProps = state => {
+  console.log(state);
+  return state;
 };
 
 const mapDispatchToProps = dispatch => {

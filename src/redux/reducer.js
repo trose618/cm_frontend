@@ -64,6 +64,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         selected_coach: action.payload
       };
+
+    case "ACCEPT_LESSON":
+      let newArr = [...state.lessons];
+      newArr = newArr.filter(lesson => {
+        return lesson.id !== action.payload.id;
+      });
+      return {
+        ...state,
+        lessons: newArr
+      };
+
+    case "DECLINE_LESSON":
+      let neArr = [...state.lessons];
+      neArr = neArr.filter(lesson => {
+        return lesson.id !== action.payload;
+      });
+      return {
+        ...state,
+        lessons: neArr
+      };
     default:
       return state;
   }

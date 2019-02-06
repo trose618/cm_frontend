@@ -13,6 +13,7 @@ import { getLessons } from "./thunks/lessonThunks";
 import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
+import PendingLessonsContainer from "./components/PendingLessonsContainer";
 
 class App extends Component {
   componentDidMount() {
@@ -24,10 +25,12 @@ class App extends Component {
         }
       })
         .then(res => res.json())
-        .then(data => this.props.handleReload(data.user));
+        .then(data => {
+          this.props.handleReload(data.user);
+          this.props.handleLessonsReload();
+        });
     }
     this.props.handleCoachReload();
-    this.props.handleLessonsReload();
   }
 
   render() {
@@ -73,6 +76,16 @@ class App extends Component {
               render={() => {
                 return this.props.selected_coach ? (
                   <CoachSearchProfile />
+                ) : (
+                  <Redirect to="/login" />
+                );
+              }}
+            />
+            <Route
+              path="/pendingLessons"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <PendingLessonsContainer />
                 ) : (
                   <Redirect to="/login" />
                 );

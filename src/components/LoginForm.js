@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { handleLogin } from "../thunks/userThunks";
+import { getLessons } from "../thunks/lessonThunks";
 
 class LoginForm extends Component {
   constructor() {
@@ -66,6 +67,8 @@ const mapDispatchToProps = dispatch => {
           } else {
             localStorage.setItem("token", data.jwt);
             dispatch({ type: "LOGIN_USER", payload: data.user });
+            dispatch(getLessons());
+
             self.props.history.push("/profile");
           }
         })
