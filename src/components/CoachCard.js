@@ -8,7 +8,7 @@ class CoachCard extends React.Component {
       <div className="ui card coach-card">
         <img
           alt=""
-          src={this.props.image_url ? this.props.imgage_url : default_image}
+          src={this.props.image_url ? this.props.image_url : default_image}
         />
         <br />
         Rating:

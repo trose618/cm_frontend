@@ -122,6 +122,14 @@ class PrimarySearchAppBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  handleMyAccount = () => {
+    this.setState({ anchorEl: null }, () => {
+      this.setState({ mobileMoreAnchorEl: null }, () => {
+        this.props.history.push("/editProfile");
+      });
+    });
+  };
+
   handleCoaches = () => {
     this.setState({ anchorEl: null }, () => {
       this.setState({ mobileMoreAnchorEl: null }, () => {
@@ -152,7 +160,11 @@ class PrimarySearchAppBar extends React.Component {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const pendingLessons = this.props.lessons.filter(lesson => {
-      return lesson.accepted === false;
+      if (this.props.currentUser.client) {
+        return lesson.checked === false;
+      } else {
+        return lesson.accepted === false;
+      }
     });
 
     const pendingCount = pendingLessons.length;
@@ -166,7 +178,7 @@ class PrimarySearchAppBar extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.handleMyAccount}>My account</MenuItem>
         {this.props.currentUser.client ? (
           <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
         ) : null}
@@ -314,7 +326,7 @@ PrimarySearchAppBar.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log(state);
   return state;
 };
 

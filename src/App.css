@@ -40,8 +40,41 @@
 
 .search-profile-div img {
   width: 30%;
+  height: auto;
 }
 
 .lesson-card {
   width: 30%;
+}
+
+.image-edit-button {
+  position: absolute;
+  margin-top: -5%;
+  margin-left: 11%;
+}
+
+.edit-profile-info {
+  position: absolute;
+  margin-left: 44%;
+}
+
+.profile-container {
+}
+
+.profile-bio {
+  text-align: center;
+  width: 50%;
+  border: solid;
+  height: 20%;
+  /* position: absolute;
+  margin-left: 20%;
+  margin-top: -15%;*/
+}
+
+.profile-bio div {
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  overflow: scroll;
+  height: 15vh;
 }

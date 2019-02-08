@@ -65,8 +65,11 @@ const reducer = (state = initialState, action) => {
 
     case "ACCEPT_LESSON":
       let newArr = [...state.lessons];
-      newArr = newArr.filter(lesson => {
-        return lesson.id !== action.payload.id;
+      newArr = newArr.map(lesson => {
+        if (lesson.id === action.payload.id) {
+          lesson = action.payload;
+        }
+        return lesson;
       });
       return {
         ...state,
@@ -82,6 +85,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         lessons: neArr
       };
+
+    case "UPDATE_USER":
+      return {
+        ...state,
+        currentUser: action.payload
+      };
+
+    case "DELETE_USER":
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        currentUser: false,
+        selected_coach: false,
+        lessons: [],
+        coaches: []
+      };
+
     default:
       return state;
   }

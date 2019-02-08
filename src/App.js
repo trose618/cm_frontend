@@ -14,6 +14,7 @@ import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
 import PendingLessonsContainer from "./components/PendingLessonsContainer";
+import EditProfile from "./components/EditProfile";
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(data => {
+          console.log("did the fetch");
           this.props.handleReload(data.user);
           this.props.handleLessonsReload();
         });
@@ -96,6 +98,16 @@ class App extends Component {
               render={() => {
                 return localStorage.getItem("token") ? (
                   <CoachContainer />
+                ) : (
+                  <Redirect to="/login" />
+                );
+              }}
+            />
+            <Route
+              path="/editProfile"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <EditProfile />
                 ) : (
                   <Redirect to="/login" />
                 );

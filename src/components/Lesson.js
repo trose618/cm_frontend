@@ -12,6 +12,10 @@ class Lesson extends Component {
     this.props.handleDecline(this.props.lesson.id);
   };
 
+  handleConfirm = () => {
+    this.props.handleConfirm(this.props.lesson.id);
+  };
+
   render() {
     const date = new Date(this.props.lesson.lesson_date);
     let hours = date.getHours();
@@ -30,14 +34,38 @@ class Lesson extends Component {
       ("0" + date.getUTCDate()).slice(-2) +
       " ";
 
-    const lessonHead = this.props.client
-      ? `Waiting for coach response`
-      : `Pending request from ${this.props.lesson.client_name}`;
+    const lessonHeadForCoach = () => {
+      if (this.props.lesson.checked !== true) {
+        if (this.props.lesson.accepted !== true) {
+          return "New Lesson Request";
+        } else {
+          return "Waiting For Confirmation";
+        }
+      } else {
+        return "Lesson Scheduled";
+      }
+    };
+
+    const lessonHeadForClient = () => {
+      if (this.props.lesson.checked !== true) {
+        if (this.props.lesson.accepted !== true) {
+          return "Waiting For Coach To Respond";
+        } else {
+          return "Confirm This Lesson";
+        }
+      } else {
+        return "Lesson Scheduled";
+      }
+    };
 
     return (
       <div>
         <div className="ui card raised">
-          <h3>{lessonHead}</h3>
+          <h3>
+            {this.props.client ? lessonHeadForClient() : lessonHeadForCoach()}
+          </h3>
+          <br />
+          <p>Name: {this.props.lesson.client_name}</p>
           <br />
           <p>Requested Date: {dateString + " " + strTime}</p>
           <br />
@@ -54,13 +82,34 @@ class Lesson extends Component {
           <p>Email: {this.props.lesson.client_email}</p>
 
           <br />
-          <div style={{ display: this.props.client ? "none" : "show" }}>
-            <div className="ui button" onClick={this.handleAccept}>
-              Accept Lesson
-            </div>
-            <div className="ui button" onClick={this.handleDecline}>
-              Decline Lesson
-            </div>
+          <div>
+            {this.props.client ? (
+              <div>
+                {this.props.lesson.accepted === true &&
+                this.props.lesson.checked !== true ? (
+                  <div className="ui button" onClick={this.handleConfirm}>
+                    Confirm Lesson
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <div>
+                {this.props.lesson.accepted !== true ? (
+                  <div>
+                    <div className="ui button" onClick={this.handleAccept}>
+                      Accept Lesson
+                    </div>
+                    <div className="ui button" onClick={this.handleDecline}>
+                      Decline Lesson
+                    </div>
+                  </div>
+                ) : (
+                  <div className="ui button" onClick={this.handleDecline}>
+                    Cancel Lesson
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

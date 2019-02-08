@@ -28,6 +28,19 @@ class CoachSearchProfile extends React.Component {
         >
           <LessonModal />
         </div>
+        <div className="profile-bio" style={{ marginLeft: "25%" }}>
+          <span style={{ fontStyle: "strong" }}>Bio</span>
+          <hr />
+          <br />
+          <div>
+            Quisque purus tellus, eleifend elementum tortor congue, accumsan
+            vehicula metus. Praesent non sapien ut arcu aliquet varius at ac
+            nisi. Aliquam ut posuere metus, ac fringilla lectus. Interdum et
+            malesuada fames ac ante ipsum primis in faucibus. Integer
+            ullamcorper non lacus maximus viverra. Sed et faucibus orci. In
+            efficitur ante ac sapien lobortis, posuere tempor orci gravida.
+          </div>
+        </div>
       </div>
     );
   }

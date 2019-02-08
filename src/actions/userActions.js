@@ -19,3 +19,10 @@ export const submitLesson = lessonData => {
     payload: lessonData.lesson
   };
 };
+
+export const deleteUser = id => {
+  return {
+    type: "DELETE_USER",
+    payload: id
+  };
+};

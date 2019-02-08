@@ -22,10 +22,13 @@ export const acceptLesson = id => {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token")
       },
-      body: JSON.stringify({ accepted: true })
+      body: JSON.stringify({ accepted: true, checked: false })
     })
       .then(res => res.json())
-      .then(data => dispatch({ type: "ACCEPT_LESSON", payload: data.lesson }));
+      .then(data => {
+        console.log(data);
+        dispatch({ type: "ACCEPT_LESSON", payload: data.lesson });
+      });
     //
   };
 };
@@ -40,6 +43,26 @@ export const declineLesson = id => {
     })
       .then(res => res.json())
       .then(data => dispatch({ type: "DECLINE_LESSON", payload: id }));
+    //
+  };
+};
+
+export const confirmLesson = id => {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/lessons/${id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+      body: JSON.stringify({ checked: true })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        dispatch({ type: "ACCEPT_LESSON", payload: data.lesson });
+      });
     //
   };
 };
