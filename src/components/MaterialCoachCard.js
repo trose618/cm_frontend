@@ -35,7 +35,7 @@ function MaterialCoachCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.coach.image_url ? props.coach.imgage_url : default_image}
+          image={props.coach.image_url ? props.coach.image_url : default_image}
           title="Contemplative Reptile"
         />
         <CardContent>

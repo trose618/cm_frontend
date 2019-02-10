@@ -8,10 +8,6 @@ import { handleNewLesson } from "../thunks/userThunks";
 import { connect } from "react-redux";
 import { submitLesson } from "../actions/userActions";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
   const top = 50;
   const left = 50;

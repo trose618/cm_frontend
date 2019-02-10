@@ -10,11 +10,13 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
 import { getLessons } from "./thunks/lessonThunks";
+import { getConvos } from "./thunks/userThunks";
 import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
 import PendingLessonsContainer from "./components/PendingLessonsContainer";
 import EditProfile from "./components/EditProfile";
+import ConversationApp from "./components/ConversationApp";
 
 class App extends Component {
   componentDidMount() {
@@ -27,9 +29,9 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("did the fetch");
           this.props.handleReload(data.user);
           this.props.handleLessonsReload();
+          this.props.handleMessagesReload();
         });
     }
     this.props.handleCoachReload();
@@ -38,8 +40,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <PrimarySearchAppBar />
+        <div className="nav-bar">
+          <PrimarySearchAppBar />
+        </div>
         <div className="main-display-div">
+          {localStorage.getItem("token") ? (
+            <div
+              style={{
+                display: this.props.toggleChatInterface ? "block" : "none"
+              }}
+            >
+              <ConversationApp />
+            </div>
+          ) : null}
           <Switch>
             <Route
               path="/signUp"
@@ -113,6 +126,7 @@ class App extends Component {
                 );
               }}
             />
+
             <Route path="/" component={HomePage} />
           </Switch>
         </div>
@@ -133,6 +147,9 @@ const mapDispatchToProps = dispatch => {
 
     handleLessonsReload: () => {
       dispatch(getLessons());
+    },
+    handleMessagesReload: () => {
+      dispatch(getConvos());
     }
   };
 };

@@ -23,14 +23,7 @@ class UserProfile extends Component {
           <div className="profile-bio">
             <span style={{ fontStyle: "strong" }}>Bio</span>
             <hr />
-            <div>
-              Quisque purus tellus, eleifend elementum tortor congue, accumsan
-              vehicula metus. Praesent non sapien ut arcu aliquet varius at ac
-              nisi. Aliquam ut posuere metus, ac fringilla lectus. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Integer
-              ullamcorper non lacus maximus viverra. Sed et faucibus orci. In
-              efficitur ante ac sapien lobortis, posuere tempor orci gravida.
-            </div>
+            <div>{this.props.bio}</div>
           </div>
         </div>
       </div>
@@ -39,7 +32,6 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { ...state.currentUser };
 };
 

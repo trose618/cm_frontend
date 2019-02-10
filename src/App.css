@@ -1,8 +1,22 @@
 .App {
   text-align: center;
   width: 100%;
+  background-color: silver;
+  min-height: 100vh;
+  height: auto;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
 .signUp {
   position: relative;
   margin-top: 50%;
@@ -23,7 +37,13 @@
 }
 
 .main-display-div {
-  margin-top: 2%;
+  /* position: relative; */
+
+  background-color: blanchedalmond;
+  margin-top: 62px;
+  margin-left: 15%;
+  margin-right: 15%;
+  min-height: 100vh;
 }
 
 .profile-div {
@@ -58,9 +78,6 @@
   margin-left: 44%;
 }
 
-.profile-container {
-}
-
 .profile-bio {
   text-align: center;
   width: 50%;
@@ -75,6 +92,121 @@
   width: 100%;
   text-align: left;
   overflow: hidden;
-  overflow: scroll;
+  overflow: auto;
   height: 15vh;
+}
+
+.conversationsList {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 17vw;
+  border: solid;
+  background-color: grey;
+  overflow: hidden;
+  height: 90%;
+}
+
+.conversationApp {
+  position: relative;
+}
+
+.conversation-main {
+  float: right;
+}
+
+.messagesDiv {
+  position: relative;
+}
+
+.messageAreaTitleAndMessage {
+  /* text-align: center; */
+  /* position: relative; */
+}
+
+.messagesAreaInside {
+  /* text-align: center; */
+  background-color: grey;
+  position: relative;
+}
+
+.newMessageForm {
+}
+
+.newMessageForm textarea {
+  overflow: auto;
+}
+
+.messagesArea {
+  position: fixed;
+  right: 18%;
+  bottom: 0;
+  width: 22vw;
+  border: solid;
+  border-width: 0.1vw;
+  height: 45%;
+  background-color: grey;
+  border-radius: 0.5vw;
+  z-index: 1;
+  /* text-align: center; */
+}
+
+.close-convo-button {
+  position: absolute;
+  background-color: aliceblue;
+  top: 0;
+  right: 0;
+  font-size: 2vw;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-title {
+  background-color: grey;
+  border-radius: 0.5vw;
+
+  min-height: 5vh;
+}
+
+.messagesdisplay {
+  /* border: solid; */
+  border-width: 0.1vw;
+  text-align: center;
+  width: 100%;
+  margin-top: -5%;
+  /* margin-left: 10%;
+  margin-right: 10%; */
+  min-height: 30vh;
+  max-height: 30vh;
+  overflow: auto;
+  scroll-behavior: auto;
+  background-color: white;
+}
+
+.message {
+  text-align: center;
+  padding-top: 0.5vh;
+  padding-bottom: 0.2vh;
+  position: relative;
+  right: 0;
+  padding-left: 0.2vw;
+}
+
+.message div {
+  padding-left: 0.5vw;
+  /* border: solid; */
+  max-width: 10vw;
+  font-size: 1.8vh;
+  text-align: left;
+  height: auto;
+  border-radius: 10px;
+}
+
+.messagesdisplay ul {
+  /* overflow: hidden; */
+}
+
+.new-message-form {
+  /* position: absolute; */
+  /* bottom: 0; */
 }

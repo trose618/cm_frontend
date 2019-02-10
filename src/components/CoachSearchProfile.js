@@ -1,10 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import LessonModal from "./LessonModal";
+import Button from "@material-ui/core/Button";
+import { startConvo } from "../thunks/userThunks";
 
 class CoachSearchProfile extends React.Component {
   handleClick = () => {
-    this.setState({ openLessonForm: true });
+    this.props.messageCoach(
+      this.props.currentUser.id,
+      this.props.coach.id,
+      this.props.coach.username
+    );
   };
 
   render() {
@@ -16,7 +22,7 @@ class CoachSearchProfile extends React.Component {
           alt=""
           src={
             this.props.coach.image_url
-              ? this.props.coach.imgage_url
+              ? this.props.coach.image_url
               : default_image
           }
         />
@@ -28,6 +34,7 @@ class CoachSearchProfile extends React.Component {
         >
           <LessonModal />
         </div>
+        <Button onClick={this.handleClick}>Message</Button>
         <div className="profile-bio" style={{ marginLeft: "25%" }}>
           <span style={{ fontStyle: "strong" }}>Bio</span>
           <hr />
@@ -46,6 +53,13 @@ class CoachSearchProfile extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    messageCoach: (client_id, coach_id, coach_name) =>
+      dispatch(startConvo(client_id, coach_id, coach_name))
+  };
+};
+
 const mapStateToProps = state => {
   return {
     coach: state.selected_coach,
@@ -53,4 +67,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CoachSearchProfile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoachSearchProfile);

@@ -1,3 +1,5 @@
+import { API_ROOT } from "../constants";
+
 export const handleLogin = (user, path) => {
   return function(dispatch) {
     //alert(`http://localhost:3000/api/v1/${path}`);
@@ -117,5 +119,44 @@ export const handleUpdateBio = (id, bio) => {
     })
       .then(res => res.json())
       .then(console.log);
+  };
+};
+
+export const startConvo = (client_id, coach_id, coach_name) => {
+  return dispatch => {
+    return fetch("http://localhost:3000/api/v1/conversations", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        title: coach_name,
+        user_one_id: client_id,
+        user_two_id: coach_id
+      })
+    }).then(res => {
+      if (res.ok) {
+        console.log("convo successfully created!");
+      } else {
+        console.log("failed to create convo");
+      }
+    });
+  };
+};
+
+export const getConvos = () => {
+  return dispatch => {
+    return fetch(`${API_ROOT}/user_convos`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    })
+      .then(res => res.json())
+      .then(conversations =>
+        dispatch({ type: "LOAD_CONVOS", payload: conversations })
+      );
   };
 };

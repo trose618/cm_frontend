@@ -4,6 +4,7 @@ class CoachCard extends React.Component {
   render() {
     const default_image = `https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1-744x744.jpg`;
 
+    console.log(this.props);
     return (
       <div className="ui card coach-card">
         <img

@@ -118,6 +118,14 @@ class PrimarySearchAppBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
 
+  handleMessagesClick = () => {
+    this.setState({ anchorEl: null }, () => {
+      this.setState({ mobileMoreAnchorEl: null }, () => {
+        this.props.toggleMessageInterface();
+      });
+    });
+  };
+
   handleMobileMenuClose = () => {
     this.setState({ mobileMoreAnchorEl: null });
   };
@@ -179,9 +187,9 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
         <MenuItem onClick={this.handleMyAccount}>My account</MenuItem>
-        {this.props.currentUser.client ? (
-          <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
-        ) : null}
+
+        <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
+
         <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
       </Menu>
     );
@@ -209,7 +217,7 @@ class PrimarySearchAppBar extends React.Component {
         onClose={this.handleMobileMenuClose}
       >
         <MenuItem>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={this.handleMessagesClick}>
             <Badge badgeContent={4} color="secondary">
               <MailIcon />
             </Badge>
@@ -235,7 +243,7 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar>
           <Toolbar>
             <IconButton
               className={classes.menuButton}
@@ -269,7 +277,10 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.sectionDesktop}>
               {localStorage.getItem("token") ? (
                 <div>
-                  <IconButton color="inherit">
+                  <IconButton
+                    color="inherit"
+                    onClick={this.handleMessagesClick}
+                  >
                     <Badge badgeContent={0} color="secondary">
                       <MailIcon />
                     </Badge>
@@ -332,7 +343,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleLogout: () => dispatch({ type: "LOGOUT" })
+    handleLogout: () => dispatch({ type: "LOGOUT" }),
+    toggleMessageInterface: () => dispatch({ type: "TOGGLE_CHAT" })
   };
 };
 

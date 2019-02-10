@@ -6,8 +6,6 @@ import { declineLesson } from "../thunks/lessonThunks";
 import { confirmLesson } from "../thunks/lessonThunks";
 
 const PendingLessonsContainer = props => {
-  const testingArray = props.lessons;
-
   const handleAccept = lesson_id => {
     props.acceptLesson(lesson_id);
   };
