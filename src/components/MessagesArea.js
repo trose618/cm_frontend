@@ -19,30 +19,14 @@ const MessagesArea = ({
         <h3>{title}</h3>
       </div>
       <div className="messagesdisplay">
-        <div>
-          {orderedMessages(messages, userId)}{" "}
-          <div
-            style={{ float: "left", clear: "both" }}
-            ref={el => {
-              messagesEnd = el;
-            }}
-          />
-        </div>
+        <div>{orderedMessages(messages, userId)} </div>
       </div>
-      {scrollToBottom()}
 
       <div className="new-message-form">
         <NewMessageForm conversation_id={id} user_id={userId} />
       </div>
     </div>
   );
-};
-
-const scrollToBottom = () => {
-  // debugger;
-  if (messagesEnd.current) {
-    messagesEnd.current.scrollIntoView({ behavior: "smooth" });
-  }
 };
 
 const mapStateToProps = state => {

@@ -50,7 +50,9 @@ const reducer = (state = initialState, action) => {
         selected_coach: false,
         lessons: [],
         coaches: [],
-        conversations: []
+        conversations: [],
+        toggleChatInterface: false,
+        activeConversation: false
         // localStorage.removeItem("token");
         // this.setState({ currentUser: {} }, () => this.props.history.push("/login"));
       };

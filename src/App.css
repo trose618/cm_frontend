@@ -15,7 +15,7 @@
 .nav-bar {
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 12;
 }
 .signUp {
   position: relative;
@@ -83,6 +83,7 @@
   width: 50%;
   border: solid;
   height: 20%;
+  border-width: 0.1vw;
   /* position: absolute;
   margin-left: 20%;
   margin-top: -15%;*/
@@ -105,6 +106,7 @@
   background-color: grey;
   overflow: hidden;
   height: 90%;
+  z-index: 10;
 }
 
 .conversationApp {
@@ -147,7 +149,7 @@
   height: 45%;
   background-color: grey;
   border-radius: 0.5vw;
-  z-index: 1;
+  z-index: 10;
   /* text-align: center; */
 }
 
@@ -209,4 +211,10 @@
 .new-message-form {
   /* position: absolute; */
   /* bottom: 0; */
+}
+
+.Calendar {
+  width: 100%;
+  height: auto;
+  background-color: rgb(218, 191, 131);
 }

@@ -9,7 +9,8 @@ class CoachSearchProfile extends React.Component {
     this.props.messageCoach(
       this.props.currentUser.id,
       this.props.coach.id,
-      this.props.coach.username
+      this.props.coach.username,
+      this.props.currentUser.username
     );
   };
 
@@ -55,8 +56,8 @@ class CoachSearchProfile extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    messageCoach: (client_id, coach_id, coach_name) =>
-      dispatch(startConvo(client_id, coach_id, coach_name))
+    messageCoach: (client_id, coach_id, coach_name, user_name) =>
+      dispatch(startConvo(client_id, coach_id, coach_name, user_name))
   };
 };
 

@@ -122,7 +122,7 @@ export const handleUpdateBio = (id, bio) => {
   };
 };
 
-export const startConvo = (client_id, coach_id, coach_name) => {
+export const startConvo = (client_id, coach_id, coach_name, user_name) => {
   return dispatch => {
     return fetch("http://localhost:3000/api/v1/conversations", {
       method: "POST",
@@ -132,7 +132,7 @@ export const startConvo = (client_id, coach_id, coach_name) => {
         Authorization: localStorage.getItem("token")
       },
       body: JSON.stringify({
-        title: coach_name,
+        title: `convo between ${coach_name} and ${user_name}`,
         user_one_id: client_id,
         user_two_id: coach_id
       })

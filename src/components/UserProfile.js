@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Calendar from "./Calendar";
 
 class UserProfile extends Component {
   render() {
@@ -26,6 +27,7 @@ class UserProfile extends Component {
             <div>{this.props.bio}</div>
           </div>
         </div>
+        <Calendar />
       </div>
     );
   }

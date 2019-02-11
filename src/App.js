@@ -17,6 +17,7 @@ import CoachContainer from "./components/CoachContainer";
 import PendingLessonsContainer from "./components/PendingLessonsContainer";
 import EditProfile from "./components/EditProfile";
 import ConversationApp from "./components/ConversationApp";
+import Calendar from "./components/Calendar";
 
 class App extends Component {
   componentDidMount() {
@@ -32,9 +33,9 @@ class App extends Component {
           this.props.handleReload(data.user);
           this.props.handleLessonsReload();
           this.props.handleMessagesReload();
+          this.props.handleCoachReload();
         });
     }
-    this.props.handleCoachReload();
   }
 
   render() {
@@ -54,6 +55,7 @@ class App extends Component {
             </div>
           ) : null}
           <Switch>
+            <Route path="/calendar" component={Calendar} />
             <Route
               path="/signUp"
               render={() => {
