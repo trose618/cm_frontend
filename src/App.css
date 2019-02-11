@@ -103,10 +103,16 @@
   bottom: 0;
   width: 17vw;
   border: solid;
+  border-width: 0.1vw;
   background-color: grey;
   overflow: hidden;
   height: 90%;
   z-index: 10;
+}
+
+.conversationsList div {
+  padding-bottom: 2%;
+  padding-top: 2%;
 }
 
 .conversationApp {
@@ -166,8 +172,9 @@
 .chat-title {
   background-color: grey;
   border-radius: 0.5vw;
-
-  min-height: 5vh;
+  height: auto;
+  min-height: 6vh;
+  overflow: auto;
 }
 
 .messagesdisplay {
@@ -175,7 +182,7 @@
   border-width: 0.1vw;
   text-align: center;
   width: 100%;
-  margin-top: -5%;
+
   /* margin-left: 10%;
   margin-right: 10%; */
   min-height: 30vh;
@@ -196,8 +203,10 @@
 
 .message div {
   padding-left: 0.5vw;
+  padding-right: 0.5vw;
+
   /* border: solid; */
-  max-width: 10vw;
+  max-width: 18vw;
   font-size: 1.8vh;
   text-align: left;
   height: auto;

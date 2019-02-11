@@ -21,7 +21,6 @@ class NewMessageForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
     fetch(`${API_ROOT}/messages`, {
       method: "POST",
       headers: HEADERS,
@@ -34,15 +33,15 @@ class NewMessageForm extends React.Component {
     return (
       <div className="newMessageForm">
         <form onSubmit={this.handleSubmit}>
-          <label>New Message:</label>
-          <br />
           <textarea
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
-            cols={30}
-            rows={1}
+            style={{ width: "100%" }}
+            rows={2}
+            placeholder="Type a message..."
           />
+          <br />
           <input type="submit" value="send" />
         </form>
       </div>

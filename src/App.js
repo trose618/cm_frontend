@@ -11,6 +11,7 @@ import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
 import { getLessons } from "./thunks/lessonThunks";
 import { getConvos } from "./thunks/userThunks";
+import { getConfirmedLessons } from "./thunks/lessonThunks";
 import CoachSearchProfile from "./components/CoachSearchProfile";
 
 import CoachContainer from "./components/CoachContainer";
@@ -34,7 +35,14 @@ class App extends Component {
           this.props.handleLessonsReload();
           this.props.handleMessagesReload();
           this.props.handleCoachReload();
+          this.props.handleSetConfirmedLessons();
         });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.currentUser && nextProps.currentUser) {
+      this.props.handleCoachReload();
     }
   }
 
@@ -152,6 +160,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleMessagesReload: () => {
       dispatch(getConvos());
+    },
+    handleSetConfirmedLessons: () => {
+      dispatch(getConfirmedLessons());
     }
   };
 };

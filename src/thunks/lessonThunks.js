@@ -60,9 +60,24 @@ export const confirmLesson = id => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         dispatch({ type: "ACCEPT_LESSON", payload: data.lesson });
-      });
+      })
+      .then(dispatch(getConfirmedLessons()));
     //
+  };
+};
+
+export const getConfirmedLessons = () => {
+  return dispatch => {
+    return fetch("http://localhost:3000/api/v1/confirmed_lessons", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    })
+      .then(res => res.json())
+      .then(lessons =>
+        dispatch({ type: "SET_CONFIRMED_LESSONS", payload: lessons })
+      );
   };
 };

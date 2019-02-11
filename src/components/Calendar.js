@@ -19,6 +19,18 @@ class Calendar extends Component {
   };
 
   componentDidMount() {
+    let lessons = this.props.lessons.map(lesson => {
+      let date = lesson.lesson_date
+        .split(/[\-T:]+/)
+        .map(digit => parseInt(digit));
+
+      return {
+        title: `Lesson with ${lesson.client_name}`,
+        start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
+        end: new Date(date[0], date[1] - 1, date[2], date[3] + 1, date[4], 0),
+        desc: lesson.lesson_focus
+      };
+    });
     this.setState({ cal_events: this.props.lessons });
     // let self = this;
     // axios
@@ -47,9 +59,23 @@ class Calendar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      cal_events: nextProps.lessons
-    });
+    if (nextProps.lessons) {
+      let lessons = nextProps.lessons.map(lesson => {
+        let date = lesson.lesson_date
+          .split(/[\-T:]+/)
+          .map(digit => parseInt(digit));
+
+        return {
+          title: `Lessons with ${lesson.client_name}`,
+          start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
+          end: new Date(date[0], date[1] - 1, date[2], date[3] + 1, date[4], 0),
+          desc: lesson.lesson_focus
+        };
+      });
+      this.setState({
+        cal_events: lessons
+      });
+    }
   }
 
   render() {
@@ -81,7 +107,7 @@ class Calendar extends Component {
 }
 
 const mapStateToProps = state => {
-  return { lessons: state.lessons, user: state.currentUser };
+  return { lessons: state.confirmed_lessons, user: state.currentUser };
 };
 
 export default connect(mapStateToProps)(Calendar);

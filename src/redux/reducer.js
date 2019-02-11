@@ -5,11 +5,17 @@ const initialState = {
   selected_coach: false,
   toggleChatInterface: false,
   conversations: [],
-  activeConversation: null
+  activeConversation: null,
+  confirmed_lessons: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_CONFIRMED_LESSONS":
+      return {
+        ...state,
+        confirmed_lessons: action.payload
+      };
     case "RECEIVE_CONVO":
       return {
         ...state,
@@ -52,7 +58,8 @@ const reducer = (state = initialState, action) => {
         coaches: [],
         conversations: [],
         toggleChatInterface: false,
-        activeConversation: false
+        activeConversation: false,
+        confirmed_lessons: []
         // localStorage.removeItem("token");
         // this.setState({ currentUser: {} }, () => this.props.history.push("/login"));
       };
