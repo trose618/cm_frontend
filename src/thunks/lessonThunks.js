@@ -62,7 +62,11 @@ export const confirmLesson = id => {
       .then(data => {
         dispatch({ type: "ACCEPT_LESSON", payload: data.lesson });
       })
-      .then(dispatch(getConfirmedLessons()));
+      .then(
+        dispatch(getConfirmedLessons()).then(lessons =>
+          dispatch({ type: "SET_CONFIRMED_LESSONS", payload: lessons })
+        )
+      );
     //
   };
 };
@@ -74,10 +78,6 @@ export const getConfirmedLessons = () => {
       headers: {
         Authorization: localStorage.getItem("token")
       }
-    })
-      .then(res => res.json())
-      .then(lessons =>
-        dispatch({ type: "SET_CONFIRMED_LESSONS", payload: lessons })
-      );
+    }).then(res => res.json());
   };
 };

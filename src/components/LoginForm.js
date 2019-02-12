@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { handleLogin } from "../thunks/userThunks";
-import { getLessons } from "../thunks/lessonThunks";
+import { getLessons, getConfirmedLessons } from "../thunks/lessonThunks";
 import { getCoaches } from "../thunks/coachThunks";
 
 class LoginForm extends Component {
@@ -70,6 +70,7 @@ const mapDispatchToProps = dispatch => {
             dispatch({ type: "LOGIN_USER", payload: data.user });
             dispatch(getLessons());
             dispatch(getCoaches());
+            dispatch(getConfirmedLessons());
 
             self.props.history.push("/profile");
           }

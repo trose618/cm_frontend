@@ -4,7 +4,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios";
 import { connect } from "react-redux";
-
+import { getConfirmedLessons } from "../thunks/lessonThunks";
 import "../App.css";
 moment.locale("en-GB");
 BigCalendar.momentLocalizer(moment);
@@ -19,54 +19,48 @@ class Calendar extends Component {
   };
 
   componentDidMount() {
-    let lessons = this.props.lessons.map(lesson => {
-      let date = lesson.lesson_date
-        .split(/[\-T:]+/)
-        .map(digit => parseInt(digit));
+    fetch("http://localhost:3000/api/v1/confirmed_lessons", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    })
+      .then(res => res.json())
+      .then(cLessons => {
+        let lessons = cLessons.map(lesson => {
+          let date = lesson.lesson_date
+            .split(/[\-T:]+/)
+            .map(digit => parseInt(digit));
 
-      return {
-        title: `Lesson with ${lesson.client_name}`,
-        start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
-        end: new Date(date[0], date[1] - 1, date[2], date[3] + 1, date[4], 0),
-        desc: lesson.lesson_focus
-      };
-    });
-    this.setState({ cal_events: this.props.lessons });
-    // let self = this;
-    // axios
-    //   .get("http://localhost:3000/api/v1/coach_lessons", {
-    //     method: "GET",
-    //     headers: {
-    //       Authorization: localStorage.getItem("token")
-    //     }
-    //   })
-    //   .then(response => {
-    //     let appointments = response.data;
-
-    //     for (let i = 0; i < appointments.length; i++) {
-    //       appointments[i].start = moment
-    //         .utc(appointments[i].lesson_date)
-    //         .toDate();
-    //       //   appointments[i].end = moment.utc(appointments[i].end).toDate();
-    //     }
-    //     self.setState({
-    //       cal_events: appointments
-    //     });
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+          return {
+            title: `Lesson with ${lesson.client_name}`,
+            start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
+            end: new Date(
+              date[0],
+              date[1] - 1,
+              date[2],
+              date[3] + 1,
+              date[4],
+              0
+            ),
+            desc: lesson.lesson_focus
+          };
+        });
+        this.setState({
+          cal_events: lessons
+        });
+      });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.lessons) {
+    if (nextProps.lessons.length) {
       let lessons = nextProps.lessons.map(lesson => {
         let date = lesson.lesson_date
           .split(/[\-T:]+/)
           .map(digit => parseInt(digit));
-
+        console.log(date[2], date[2] + 1);
         return {
-          title: `Lessons with ${lesson.client_name}`,
+          title: `${lesson.client_name}'s lesson`,
           start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
           end: new Date(date[0], date[1] - 1, date[2], date[3] + 1, date[4], 0),
           desc: lesson.lesson_focus

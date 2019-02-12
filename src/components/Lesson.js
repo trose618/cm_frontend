@@ -65,22 +65,19 @@ class Lesson extends Component {
             {this.props.client ? lessonHeadForClient() : lessonHeadForCoach()}
           </h3>
           <br />
-          <p>Name: {this.props.lesson.client_name}</p>
+          Name: {this.props.lesson.client_name}
           <br />
-          <p>Requested Date: {dateString + " " + strTime}</p>
+          Requested Date: {dateString + " " + strTime}
           <br />
-          <p>Level: {this.props.lesson.client_level}</p>
+          Level: {this.props.lesson.client_level}
           <br />
-          <p>Age: {this.props.lesson.client_age}</p>
+          Age: {this.props.lesson.client_age}
           <br />
-          <p>
-            Focus of Lesson:
-            <br />
-            {this.props.lesson.lesson_focus}
-          </p>
+          Focus of Lesson:
           <br />
-          <p>Email: {this.props.lesson.client_email}</p>
-
+          {this.props.lesson.lesson_focus}
+          <br />
+          Email: {this.props.lesson.client_email}
           <br />
           <div>
             {this.props.client ? (

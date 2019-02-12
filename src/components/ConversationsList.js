@@ -1,7 +1,6 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
 import { API_ROOT } from "../constants";
-import NewConversationForm from "./NewConversationForm";
 import MessagesArea from "./MessagesArea";
 import Cable from "./Cable";
 import { connect } from "react-redux";
@@ -49,6 +48,7 @@ class ConversationsList extends React.Component {
   };
 
   handleReceivedMessage = response => {
+    console.log(response);
     const { message } = response;
     const conversations = [...this.state.conversations];
     const conversation = conversations.find(

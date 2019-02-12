@@ -21,6 +21,33 @@ import ConversationApp from "./components/ConversationApp";
 import Calendar from "./components/Calendar";
 
 class App extends Component {
+  state = {
+    auth: {
+      isLoggedIn: false,
+      user: ""
+    },
+    joinLine: {
+      code: "",
+      error: false,
+      lineId: null,
+      redirect: false
+    },
+    line: {
+      line: {},
+      users: []
+    }
+  };
+
+  updateAppStateLine = newLine => {
+    console.log("updateAppStateLine: ", this.state.line);
+    this.setState({
+      line: {
+        line: newLine.line,
+        users: newLine.users
+      }
+    });
+  };
+
   componentDidMount() {
     if (localStorage.getItem("token")) {
       fetch("http://localhost:3000/api/v1/reload", {
@@ -162,7 +189,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(getConvos());
     },
     handleSetConfirmedLessons: () => {
-      dispatch(getConfirmedLessons());
+      dispatch(getConfirmedLessons()).then(lessons =>
+        dispatch({ type: "SET_CONFIRMED_LESSONS", payload: lessons })
+      );
     }
   };
 };
