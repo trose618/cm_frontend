@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleUserDelete } from "../thunks/userThunks";
 import { handleUpdateUser } from "../thunks/userThunks";
-import { handleUpdateImage } from "../thunks/userThunks";
-import { handleUpdateBio } from "../thunks/userThunks";
 
 class EditProfile extends Component {
   state = {

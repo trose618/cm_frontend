@@ -16,10 +16,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         confirmed_lessons: action.payload
       };
-    case "RECEIVE_CONVO":
+    case "RECEIVED_CONVO":
+      console.log("reducer recieved convo");
       return {
         ...state,
         conversations: [...state.conversations, action.payload]
+      };
+
+    case "RECEIVED_MESSAGE":
+      return {
+        ...state,
+        conversations: action.payload
       };
     case "SET_CURRENT_CONVO":
       return {

@@ -2,8 +2,6 @@ import React from "react";
 import NewMessageForm from "./NewMessageForm";
 import { connect } from "react-redux";
 
-let messagesEnd = React.createRef();
-
 const MessagesArea = ({
   conversation: { id, title },
   userId,
@@ -58,7 +56,7 @@ const orderedMessages = (messages, userId) => {
       <div className="message" key={message.id}>
         <div
           style={{
-            backgroundColor: message.user_id == userId ? "aqua" : "yellow"
+            backgroundColor: message.user_id === userId ? "aqua" : "yellow"
           }}
         >
           {message.text} <br />

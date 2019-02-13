@@ -8,12 +8,12 @@ class NewMessageForm extends React.Component {
     user_id: this.props.user_id
   };
 
-  componentWillReceiveProps = nextProps => {
-    this.setState({
-      conversation_id: nextProps.conversation_id,
-      user_id: nextProps.user_id
-    });
-  };
+  // componentWillReceiveProps = nextProps => {
+  //   this.setState({
+  //     conversation_id: nextProps.conversation_id,
+  //     user_id: nextProps.user_id
+  //   });
+  // };
 
   handleChange = e => {
     this.setState({ text: e.target.value });

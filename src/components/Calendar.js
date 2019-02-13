@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import axios from "axios";
 import { connect } from "react-redux";
-import { getConfirmedLessons } from "../thunks/lessonThunks";
+//import { getConfirmedLessons } from "../thunks/lessonThunks";
 import "../App.css";
 moment.locale("en-GB");
 BigCalendar.momentLocalizer(moment);
@@ -73,7 +72,6 @@ class Calendar extends Component {
   }
 
   render() {
-    console.log(this.state.cal_events);
     const { cal_events } = this.state;
     const localizer = BigCalendar.momentLocalizer(moment);
 

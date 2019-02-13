@@ -20,34 +20,11 @@ import EditProfile from "./components/EditProfile";
 import ConversationApp from "./components/ConversationApp";
 import Calendar from "./components/Calendar";
 
+import ActionCable from "actioncable";
+import { ActionCableProvider } from "react-actioncable-provider";
+import { API_WS_ROOT } from "./constants";
+
 class App extends Component {
-  state = {
-    auth: {
-      isLoggedIn: false,
-      user: ""
-    },
-    joinLine: {
-      code: "",
-      error: false,
-      lineId: null,
-      redirect: false
-    },
-    line: {
-      line: {},
-      users: []
-    }
-  };
-
-  updateAppStateLine = newLine => {
-    console.log("updateAppStateLine: ", this.state.line);
-    this.setState({
-      line: {
-        line: newLine.line,
-        users: newLine.users
-      }
-    });
-  };
-
   componentDidMount() {
     if (localStorage.getItem("token")) {
       fetch("http://localhost:3000/api/v1/reload", {
@@ -86,9 +63,15 @@ class App extends Component {
                 display: this.props.toggleChatInterface ? "block" : "none"
               }}
             >
-              <ConversationApp />
+              <ActionCableProvider
+                cable={ActionCable.createConsumer(API_WS_ROOT)}
+              >
+                <ConversationApp />
+              </ActionCableProvider>
+              }
             </div>
           ) : null}
+
           <Switch>
             <Route path="/calendar" component={Calendar} />
             <Route
