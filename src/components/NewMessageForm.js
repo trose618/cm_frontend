@@ -21,12 +21,16 @@ class NewMessageForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch(`${API_ROOT}/messages`, {
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify(this.state)
-    });
+
+    this.props.handleSendMessage(this.state.text);
     this.setState({ text: "" });
+  };
+
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
+      this.props.handleSendMessage(this.state.text);
+      this.setState({ text: "" });
+    }
   };
 
   render = () => {
@@ -40,6 +44,7 @@ class NewMessageForm extends React.Component {
             style={{ width: "100%" }}
             rows={2}
             placeholder="Type a message..."
+            onKeyPress={this.handleKeyPress}
           />
           <br />
           <input type="submit" value="send" />

@@ -1,28 +1,63 @@
 import React from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import MessagesArea from "./MessagesArea";
-import Cable from "./Cable";
 import { connect } from "react-redux";
 import { getConvos } from "../thunks/userThunks";
+import ChatConnection from "./ChatConnection";
+
+// let connection = new ChatConnection(1, handleReceivedMessage);
 
 class ConversationsList extends React.Component {
-  state = {
-    conversations: [],
-    activeConversation: null
+  componentDidMount() {
+    const that = this;
+    this.connection = new ChatConnection(
+      that.props.user.id,
+      that.handleReceivedMessage
+    );
+    // this.connection.senderId = this.props.user.id;
+    // this.connection.callback = this.handleData;
+
+    if (this.props.activeConversation !== false) {
+      this.connection.openNewRoom(this.props.activeConversation);
+    }
+  }
+
+  handleMessageReceived = response => {
+    this.handleReceivedMessage(response);
   };
 
-  componentDidMount() {
-    this.props.getConvos();
+  handleReceivedData(data) {
+    console.log("I'm getting called");
+    this.handleReceivedMessage(data);
   }
 
   handleCloseActiveConvo = () => {
-    this.props.handleClick(null);
+    this.props.handleClick(false);
   };
 
   handleClick = id => {
-    //comment out everythign above
     this.props.handleClick(id);
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeConversation === false) {
+      this.connection.disconnect();
+    } else if (!this.props.activeConversation) {
+      if (nextProps.activeConversation) {
+        console.log("no previous opened convo, but opening convo");
+
+        this.connection.openNewRoom(nextProps.activeConversation);
+      }
+    } else if (this.props.activeConversation) {
+      if (nextProps.activeConversation) {
+        console.log("if switching between convos");
+        let rooms = this.connection.roomConnections.map(room => room.roomId);
+        if (!rooms.includes(nextProps.activeConversation)) {
+          this.connection.openNewRoom(nextProps.activeConversation);
+        }
+      }
+    }
+  }
 
   handleReceivedConversation = response => {
     alert("New convo");
@@ -33,16 +68,29 @@ class ConversationsList extends React.Component {
 
   handleReceivedMessage = response => {
     console.log("the response", response);
-    const { message } = response;
-    console.log("this is the 'new' message: ", message);
+    const { content } = response;
+    console.log("this is the 'new' message: ", content);
     const conversations = [...this.props.conversations];
     let conversation = this.props.conversations.find(
-      conversation => conversation.id === message.conversation_id
+      conversation => conversation.id === response.room_id
     );
 
-    conversation.messages = [...conversation.messages, message];
+    conversation.messages = [
+      ...conversation.messages,
+      {
+        id: response.message_id,
+        conversation_id: response.room_id,
+        user_id: response.sender,
+        created_at: response.created_at,
+        text: content
+      }
+    ];
 
     this.props.handleReceivedMessage(conversations);
+  };
+
+  sendMessage = message => {
+    this.connection.talk(message, this.props.activeConversation);
   };
 
   render = () => {
@@ -51,17 +99,6 @@ class ConversationsList extends React.Component {
     return (
       <div className="conversation-main">
         <div className="conversationsList">
-          <ActionCableConsumer
-            channel={{ channel: "ConversationsChannel" }}
-            onReceived={this.handleReceivedConversation}
-          />
-          {this.props.conversations.length ? (
-            <Cable
-              conversations={conversations}
-              handleReceivedMessage={this.handleReceivedMessage}
-            />
-          ) : null}
-
           <h2>Conversations</h2>
           <div>{mapConversations(conversations, this.handleClick)}</div>
         </div>
@@ -70,6 +107,7 @@ class ConversationsList extends React.Component {
           //this div is strictly for moving the location of the chatbox
           <div className="messagesArea">
             <MessagesArea
+              handleSendMessage={this.sendMessage}
               conversation={findActiveConversation(
                 conversations,
                 activeConversation
@@ -110,10 +148,12 @@ const mapConversations = (conversations, handleClick) => {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     conversations: state.conversations,
     activeConversation: state.activeConversation,
-    toggleChatInterface: state.toggleChatInterface
+    toggleChatInterface: state.toggleChatInterface,
+    user: state.currentUser
   };
 };
 

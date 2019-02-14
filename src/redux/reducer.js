@@ -5,7 +5,7 @@ const initialState = {
   selected_coach: false,
   toggleChatInterface: false,
   conversations: [],
-  activeConversation: null,
+  activeConversation: false,
   confirmed_lessons: []
 };
 

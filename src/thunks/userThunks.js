@@ -21,7 +21,7 @@ export const handleLogin = (user, path) => {
   };
 };
 
-export const handleNewLesson = (coach_id, client_id, lesson) => {
+export const handleNewLesson = (coach_id, client_id, coach_name, lesson) => {
   return dispatch => {
     return fetch("http://localhost:3000/api/v1/lessons", {
       method: "POST",
@@ -40,7 +40,8 @@ export const handleNewLesson = (coach_id, client_id, lesson) => {
           client_id: client_id,
           lesson_date: lesson.lesson_date,
           client_age: lesson.client_age,
-          accepted: false
+          accepted: false,
+          coach_name: coach_name
         }
       })
     });
@@ -136,13 +137,7 @@ export const startConvo = (client_id, coach_id, coach_name, user_name) => {
         user_one_id: client_id,
         user_two_id: coach_id
       })
-    }).then(res => {
-      if (res.ok) {
-        console.log("convo successfully created!");
-      } else {
-        console.log("failed to create convo");
-      }
-    });
+    }).then(res => res.json());
   };
 };
 

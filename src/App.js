@@ -23,6 +23,7 @@ import Calendar from "./components/Calendar";
 import ActionCable from "actioncable";
 import { ActionCableProvider } from "react-actioncable-provider";
 import { API_WS_ROOT } from "./constants";
+import ChatConnection from "./components/ChatConnection";
 
 class App extends Component {
   componentDidMount() {
@@ -47,6 +48,7 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.currentUser && nextProps.currentUser) {
       this.props.handleCoachReload();
+      this.props.handleMessagesReload();
     }
   }
 
@@ -57,19 +59,9 @@ class App extends Component {
           <PrimarySearchAppBar />
         </div>
         <div className="main-display-div">
-          {localStorage.getItem("token") ? (
-            <div
-              style={{
-                display: this.props.toggleChatInterface ? "block" : "none"
-              }}
-            >
-              <ActionCableProvider
-                cable={ActionCable.createConsumer(API_WS_ROOT)}
-              >
-                <ConversationApp />
-              </ActionCableProvider>
-              }
-            </div>
+          {!localStorage.getItem("token") ? null : this.props
+              .toggleChatInterface ? (
+            <ConversationApp />
           ) : null}
 
           <Switch>

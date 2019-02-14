@@ -84,18 +84,24 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log(this.state.image_url);
     const default_image = `https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1-744x744.jpg`;
 
     return (
-      <div style={{ width: "100%", height: "auto", position: "relative" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "auto",
+          position: "relative",
+          textAlign: "center"
+        }}
+      >
         <h2>Edit Profile</h2>
         <div>
           <div>
             <div
               onMouseOver={this.handleMouseEnter}
               onMouseOut={this.handleMouseLeave}
-              style={{ marginLeft: "35%", width: "30%" }}
+              style={{ width: "30%", marginLeft: "35%", position: "relative" }}
             >
               <img
                 style={{ width: "100%" }}
@@ -105,7 +111,9 @@ class EditProfile extends Component {
                 }
               />
               <div
-                style={{ display: this.state.imageShowEdit ? "block" : "none" }}
+                style={{
+                  display: this.state.imageShowEdit ? "block" : "none"
+                }}
                 className="image-edit-button"
               >
                 <span className="ui button" onClick={this.handleImageEdit}>
@@ -115,7 +123,7 @@ class EditProfile extends Component {
             </div>
           </div>
           <div>
-            <div className="edit-profile-info">
+            <div>
               <div>
                 <div
                   style={{ display: this.state.imageEdit ? "block" : "none" }}

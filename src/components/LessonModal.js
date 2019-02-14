@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { handleNewLesson } from "../thunks/userThunks";
 import { connect } from "react-redux";
 import { submitLesson } from "../actions/userActions";
+import DateTimePicker from "react-datetime-picker";
 
 function getModalStyle() {
   const top = 50;
@@ -32,7 +33,13 @@ const styles = theme => ({
 
 class SimpleModal extends React.Component {
   state = {
-    open: false
+    open: false,
+    lesson_date: new Date(),
+    client_age: "",
+    client_email: "",
+    client_level: "",
+    client_name: "",
+    lesson_focus: ""
   };
 
   handleOpen = () => {
@@ -44,13 +51,23 @@ class SimpleModal extends React.Component {
   };
 
   handleFormSubmit = () => {
-    alert("Lesson booked!");
-    this.setState({ open: false });
-    this.props.handleFormSubmit(
-      this.props.coach_id,
-      this.props.client_id,
-      this.state
-    );
+    let state = { ...this.state };
+    if (state.client_name.length < 2) {
+    } else {
+      alert("Lesson booked!");
+      this.setState({ open: false });
+      this.props.handleFormSubmit(
+        this.props.coach_id,
+        this.props.client_id,
+        this.props.coach_name,
+        this.state
+      );
+    }
+  };
+
+  onChange = date => {
+    console.log(date);
+    this.setState({ lesson_date: date });
   };
 
   handleFormInput = e => {
@@ -75,12 +92,9 @@ class SimpleModal extends React.Component {
               Book a Lesson
             </Typography>
             Enter date and time of lesson
-            <input
-              type="datetime-local"
-              name="lesson_date"
-              max="2019-3-4"
-              min="2019-2-5"
-              onChange={this.handleFormInput}
+            <DateTimePicker
+              onChange={this.onChange}
+              value={this.state.lesson_date}
             />
             <br />
             Age
@@ -144,16 +158,18 @@ SimpleModal.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     coach_id: state.selected_coach.id,
-    client_id: state.currentUser.id
+    client_id: state.currentUser.id,
+    coach_name: state.selected_coach.username
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleFormSubmit: (coach, client, lesson) =>
-      dispatch(handleNewLesson(coach, client, lesson))
+    handleFormSubmit: (coach, client, coach_name, lesson) =>
+      dispatch(handleNewLesson(coach, client, coach_name, lesson))
         .then(res => res.json())
         .then(lesson => {
           console.log("being reached");

@@ -60,14 +60,18 @@ class Lesson extends Component {
 
     return (
       <div>
-        <div className="ui card raised">
+        <div className="ui card raised lesson-card">
           <h3>
             {this.props.client ? lessonHeadForClient() : lessonHeadForCoach()}
           </h3>
           <br />
+          Coach: {this.props.lesson.coach_name}
+          <br />
           Name: {this.props.lesson.client_name}
           <br />
-          Requested Date: {dateString + " " + strTime}
+          Lesson Date: {dateString}
+          <br />
+          Lesson Time: {strTime}
           <br />
           Level: {this.props.lesson.client_level}
           <br />
@@ -93,10 +97,16 @@ class Lesson extends Component {
               <div>
                 {this.props.lesson.accepted !== true ? (
                   <div>
-                    <div className="ui button" onClick={this.handleAccept}>
+                    <div
+                      className="ui button accept-decline-buttons"
+                      onClick={this.handleAccept}
+                    >
                       Accept Lesson
                     </div>
-                    <div className="ui button" onClick={this.handleDecline}>
+                    <div
+                      className="ui button accept-decline-buttons"
+                      onClick={this.handleDecline}
+                    >
                       Decline Lesson
                     </div>
                   </div>

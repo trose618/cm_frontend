@@ -5,14 +5,19 @@ import MaterialCoachCard from "./MaterialCoachCard";
 class CoachContainer extends React.Component {
   displayCoaches = () => {
     return this.props.coaches.map(coach => (
-      <MaterialCoachCard key={coach.id} coach={coach} />
+      <div className="lesson-card" key={coach.id}>
+        <MaterialCoachCard coach={coach} />
+      </div>
     ));
   };
 
   render() {
     return (
-      <div className="ui grid cards coach-container">
-        {this.displayCoaches()}
+      <div>
+        <h1> Pick a Coach</h1>
+        <hr style={{ marginTop: "30vh" }} />
+        <div className="scrolling-wrapper">{this.displayCoaches()}</div>
+        <hr />
       </div>
     );
   }

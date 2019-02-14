@@ -18,6 +18,41 @@ const PendingLessonsContainer = props => {
     props.confirmLesson(lesson_id);
   };
 
+  const waitingForCoach = () => {
+    return props.lessons
+      .filter(lesson => {
+        return lesson.accepted === false;
+      })
+      .sort(function(a, b) {
+        a = new Date(a.lesson_date);
+        b = new Date(b.lesson_date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+  };
+
+  const confirmed = () => {
+    return props.lessons
+      .filter(lesson => {
+        return lesson.checked === true;
+      })
+      .sort(function(a, b) {
+        a = new Date(a.lesson_date);
+        b = new Date(b.lesson_date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+  };
+
+  const confirmThese = () => {
+    return props.lessons
+      .filter(lesson => {
+        return lesson.checked === false && lesson.accepted === true;
+      })
+      .sort(function(a, b) {
+        a = new Date(a.lesson_date);
+        b = new Date(b.lesson_date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+  };
   //   const yourLessons = lessons => {
   //     let pendingLessons = lessons.filter(lesson => {
   //       if (this.props.currentUser.client) {
@@ -31,19 +66,62 @@ const PendingLessonsContainer = props => {
 
   return (
     <div>
-      <h1>{props.currentUser.client ? "Pending Lessons" : "Requests"}</h1>
-      <div className="ui grid cards">
-        {props.lessons.map(lesson => {
-          return (
-            <Lesson
-              key={lesson.id}
-              lesson={lesson}
-              handleAccept={handleAccept}
-              handleDecline={handleDecline}
-              handleConfirm={handleConfirm}
-            />
-          );
-        })}
+      <h1>Scheduled Lessons</h1>
+      <div>
+        <div className="scrolling-wrapper">
+          {confirmed().map(lesson => {
+            return (
+              <div className="lesson-card" key={lesson.id}>
+                <Lesson
+                  lesson={lesson}
+                  handleAccept={handleAccept}
+                  handleDecline={handleDecline}
+                  handleConfirm={handleConfirm}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h1>Lessons Waiting For Your Confirmation</h1>
+        <div>
+          <div className="scrolling-wrapper">
+            {confirmThese().map(lesson => {
+              return (
+                <div className="lesson-card" key={lesson.id}>
+                  <Lesson
+                    lesson={lesson}
+                    handleAccept={handleAccept}
+                    handleDecline={handleDecline}
+                    handleConfirm={handleConfirm}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h1>Waiting For Coach To Respond</h1>
+        <div>
+          <div className="scrolling-wrapper">
+            {waitingForCoach().map(lesson => {
+              return (
+                <div className="lesson-card" key={lesson.id}>
+                  <Lesson
+                    lesson={lesson}
+                    handleAccept={handleAccept}
+                    handleDecline={handleDecline}
+                    handleConfirm={handleConfirm}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

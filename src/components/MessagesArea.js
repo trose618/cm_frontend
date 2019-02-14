@@ -6,7 +6,8 @@ const MessagesArea = ({
   conversation: { id, title },
   userId,
   messages,
-  closeConvo
+  closeConvo,
+  handleSendMessage
 }) => {
   return (
     <div className="messagesAreaInside">
@@ -21,7 +22,11 @@ const MessagesArea = ({
       </div>
 
       <div className="new-message-form">
-        <NewMessageForm conversation_id={id} user_id={userId} />
+        <NewMessageForm
+          handleSendMessage={handleSendMessage}
+          conversation_id={id}
+          user_id={userId}
+        />
       </div>
     </div>
   );
@@ -53,7 +58,7 @@ const orderedMessages = (messages, userId) => {
   );
   return sortedMessages.map(message => {
     return (
-      <div className="message" key={message.id}>
+      <div className="message" key={message.id * Math.random() * 100}>
         <div
           style={{
             backgroundColor: message.user_id === userId ? "aqua" : "yellow"

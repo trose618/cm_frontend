@@ -6,12 +6,25 @@ import { startConvo } from "../thunks/userThunks";
 
 class CoachSearchProfile extends React.Component {
   handleClick = () => {
-    this.props.messageCoach(
-      this.props.currentUser.id,
-      this.props.coach.id,
-      this.props.coach.username,
-      this.props.currentUser.username
-    );
+    let convo_names = this.props.convos.map(convo => convo.title);
+
+    if (
+      convo_names.includes(
+        `convo between ${this.props.coach.username} and ${
+          this.props.currentUser.username
+        }`
+      )
+    ) {
+      alert("convo already exists");
+      this.props.handleToggleChat();
+    } else {
+      this.props.messageCoach(
+        this.props.currentUser.id,
+        this.props.coach.id,
+        this.props.coach.username,
+        this.props.currentUser.username
+      );
+    }
   };
 
   render() {
@@ -40,14 +53,7 @@ class CoachSearchProfile extends React.Component {
           <span style={{ fontStyle: "strong" }}>Bio</span>
           <hr />
           <br />
-          <div>
-            Quisque purus tellus, eleifend elementum tortor congue, accumsan
-            vehicula metus. Praesent non sapien ut arcu aliquet varius at ac
-            nisi. Aliquam ut posuere metus, ac fringilla lectus. Interdum et
-            malesuada fames ac ante ipsum primis in faucibus. Integer
-            ullamcorper non lacus maximus viverra. Sed et faucibus orci. In
-            efficitur ante ac sapien lobortis, posuere tempor orci gravida.
-          </div>
+          <div>{this.props.coach.bio}</div>
         </div>
       </div>
     );
@@ -56,15 +62,29 @@ class CoachSearchProfile extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    messageCoach: (client_id, coach_id, coach_name, user_name) =>
-      dispatch(startConvo(client_id, coach_id, coach_name, user_name))
+    messageCoach: (client_id, coach_id, coach_name, user_name) => {
+      dispatch(startConvo(client_id, coach_id, coach_name, user_name)).then(
+        data => {
+          if (data.conversation) {
+            alert("new convo!");
+            dispatch({ type: "TOGGLE_CHAT", payload: true });
+          } else {
+            alert("already have an existing chat with this coach");
+          }
+        }
+      );
+    },
+    handleToggleChat: () => {
+      dispatch({ type: "TOGGLE_CHAT", payload: true });
+    }
   };
 };
 
 const mapStateToProps = state => {
   return {
     coach: state.selected_coach,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    convos: state.conversations
   };
 };
 

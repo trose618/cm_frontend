@@ -40,7 +40,7 @@
   /* position: relative; */
 
   background-color: blanchedalmond;
-  margin-top: 62px;
+  margin-top: 76px;
   margin-left: 15%;
   margin-right: 15%;
   min-height: 100vh;
@@ -69,8 +69,10 @@
 
 .image-edit-button {
   position: absolute;
-  margin-top: -5%;
-  margin-left: 11%;
+  /* margin-top: -5%;*/
+  margin-bottom: 3%;
+  margin-left: 27%;
+  bottom: 0;
 }
 
 .edit-profile-info {
@@ -204,7 +206,7 @@
 .message div {
   padding-left: 0.5vw;
   padding-right: 0.5vw;
-
+  overflow-wrap: break-word;
   /* border: solid; */
   max-width: 18vw;
   font-size: 1.8vh;
@@ -226,4 +228,23 @@
   width: 100%;
   height: auto;
   background-color: rgb(218, 191, 131);
+}
+
+/* Lessons Page */
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.lesson-card {
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  font-size: 1.5vh;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.lesson-card h3 {
+  font-size: 1.6vh;
 }

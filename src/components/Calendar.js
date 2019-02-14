@@ -32,7 +32,7 @@ class Calendar extends Component {
             .map(digit => parseInt(digit));
 
           return {
-            title: `Lesson with ${lesson.client_name}`,
+            title: `Lesson for ${lesson.client_name}`,
             start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
             end: new Date(
               date[0],
