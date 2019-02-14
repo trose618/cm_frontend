@@ -15,7 +15,17 @@ class CoachContainer extends React.Component {
     return (
       <div>
         <h1> Pick a Coach</h1>
-        <hr style={{ marginTop: "30vh" }} />
+        <h4 style={{ marginTop: "10vh" }}>
+          <span>
+            Scroll through our selection of amazing world class coaches.
+          </span>
+          <br />
+          <span>
+            {" "}
+            Click on their profile to book a lesson or message a coach.
+          </span>
+        </h4>
+        <hr style={{ marginTop: "10vh" }} />
         <div className="scrolling-wrapper">{this.displayCoaches()}</div>
         <hr />
       </div>

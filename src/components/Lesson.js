@@ -64,7 +64,6 @@ class Lesson extends Component {
           <h3>
             {this.props.client ? lessonHeadForClient() : lessonHeadForCoach()}
           </h3>
-          <br />
           Coach: {this.props.lesson.coach_name}
           <br />
           Name: {this.props.lesson.client_name}

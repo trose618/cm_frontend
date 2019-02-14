@@ -10,6 +10,22 @@ const PendingLessonsContainer = props => {
     props.acceptLesson(lesson_id);
   };
 
+  const filterOutCompleted = () => {
+    return props.lessons.filter(lesson => {
+      let currentTime = new Date();
+      let currentLesson = new Date(lesson.lesson_date);
+      return currentLesson > currentTime;
+    });
+  };
+
+  const selectCompleted = () => {
+    return props.lessons.filter(lesson => {
+      let currentTime = new Date();
+      let currentLesson = new Date(lesson.lesson_date);
+      return currentLesson < currentTime;
+    });
+  };
+
   const handleDecline = lesson_id => {
     props.declineLesson(lesson_id);
   };
@@ -19,7 +35,7 @@ const PendingLessonsContainer = props => {
   };
 
   const waitingForCoach = () => {
-    return props.lessons
+    return filterOutCompleted()
       .filter(lesson => {
         return lesson.accepted === false;
       })
@@ -31,7 +47,7 @@ const PendingLessonsContainer = props => {
   };
 
   const confirmed = () => {
-    return props.lessons
+    return filterOutCompleted()
       .filter(lesson => {
         return lesson.checked === true;
       })
@@ -43,7 +59,7 @@ const PendingLessonsContainer = props => {
   };
 
   const confirmThese = () => {
-    return props.lessons
+    return filterOutCompleted()
       .filter(lesson => {
         return lesson.checked === false && lesson.accepted === true;
       })
@@ -68,6 +84,7 @@ const PendingLessonsContainer = props => {
     <div>
       <h1>Scheduled Lessons</h1>
       <div>
+        <hr />
         <div className="scrolling-wrapper">
           {confirmed().map(lesson => {
             return (
@@ -88,7 +105,10 @@ const PendingLessonsContainer = props => {
         <h1>Lessons Waiting For Your Confirmation</h1>
         <div>
           <div className="scrolling-wrapper">
-            {confirmThese().map(lesson => {
+            {(props.currentUser.client
+              ? confirmThese()
+              : waitingForCoach()
+            ).map(lesson => {
               return (
                 <div className="lesson-card" key={lesson.id}>
                   <Lesson
@@ -105,10 +125,33 @@ const PendingLessonsContainer = props => {
       </div>
       <hr />
       <div>
-        <h1>Waiting For Coach To Respond</h1>
+        <h1>Waiting For A Response</h1>
         <div>
           <div className="scrolling-wrapper">
-            {waitingForCoach().map(lesson => {
+            {(props.currentUser.client
+              ? waitingForCoach()
+              : confirmThese()
+            ).map(lesson => {
+              return (
+                <div className="lesson-card" key={lesson.id}>
+                  <Lesson
+                    lesson={lesson}
+                    handleAccept={handleAccept}
+                    handleDecline={handleDecline}
+                    handleConfirm={handleConfirm}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h1>Completed Lessons</h1>
+        <div>
+          <div className="scrolling-wrapper">
+            {selectCompleted().map(lesson => {
               return (
                 <div className="lesson-card" key={lesson.id}>
                   <Lesson

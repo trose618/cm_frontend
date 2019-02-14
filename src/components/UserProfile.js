@@ -6,8 +6,8 @@ class UserProfile extends Component {
   render() {
     const default_image = `https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1-744x744.jpg`;
     return (
-      <div className="profile-container">
-        <div style={{ display: "inline-block", height: "auto" }}>
+      <div>
+        <div style={{ display: "inline-block", height: "auto", width: "100%" }}>
           <h2>
             {this.props.username
               ? `Welcome, ${this.props.username}!`
@@ -22,7 +22,7 @@ class UserProfile extends Component {
             {this.props.username}
           </div>
           <div className="profile-bio">
-            <span style={{ fontStyle: "strong" }}>Bio</span>
+            <span style={{ fontStyle: "strong" }}>A bit about myself...</span>
             <hr />
             <div>{this.props.bio}</div>
           </div>

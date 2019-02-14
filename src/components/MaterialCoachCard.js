@@ -33,19 +33,22 @@ function MaterialCoachCard(props) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia
+        {/* <CardMedia
           className={classes.media}
           image={props.coach.image_url ? props.coach.image_url : default_image}
           title="Contemplative Reptile"
+        /> */}
+        <img
+          className="coach-card-pic"
+          alt=""
+          src={props.coach.image_url ? props.coach.image_url : default_image}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.coach.username}
           </Typography>
-          <Typography component="p">
-            Bio: Lizards are a widespread group of squamate reptiles, with over
-            6,000 species, ranging across all continents except Antarctica
-          </Typography>
+          <Typography>Rating: 5-Stars</Typography>
+          <Typography component="p">{props.coach.bio}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

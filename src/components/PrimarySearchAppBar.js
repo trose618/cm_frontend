@@ -187,9 +187,6 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
         <MenuItem onClick={this.handleMyAccount}>My account</MenuItem>
-
-        <MenuItem onClick={this.handleCoaches}>Coaches</MenuItem>
-
         <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
       </Menu>
     );
@@ -218,7 +215,7 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem>
           <IconButton color="inherit" onClick={this.handleMessagesClick}>
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={0} color="secondary">
               <MailIcon />
             </Badge>
           </IconButton>
@@ -227,7 +224,7 @@ class PrimarySearchAppBar extends React.Component {
         <MenuItem onClick={this.handlePendingClick}>
           <IconButton color="inherit">
             <Badge badgeContent={pendingCount} color="secondary">
-              <NotificationsIcon />
+              <Link to="/pendingLessons">Lessons</Link>
             </Badge>
           </IconButton>
           <p>Pending Requests</p>
@@ -258,7 +255,20 @@ class PrimarySearchAppBar extends React.Component {
               color="inherit"
               noWrap
             >
-              <Link to="/home">Coach-Me</Link>
+              <Badge>
+                <Link style={{}} to="/home">
+                  Coach-Me
+                </Link>
+              </Badge>
+              <Badge>-</Badge>
+
+              <Badge>
+                <Link to="/coaches">Coaches</Link>
+              </Badge>
+              <Badge>-</Badge>
+              <Badge badgeContent={pendingCount} color="secondary">
+                <Link to="/pendingLessons">Lessons</Link>
+              </Badge>
             </Typography>
             {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -285,11 +295,7 @@ class PrimarySearchAppBar extends React.Component {
                       <MailIcon />
                     </Badge>
                   </IconButton>
-                  <IconButton color="inherit" onClick={this.handlePendingClick}>
-                    <Badge badgeContent={pendingCount} color="secondary">
-                      <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
+
                   <IconButton
                     aria-owns={isMenuOpen ? "material-appbar" : undefined}
                     aria-haspopup="true"
