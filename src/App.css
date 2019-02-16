@@ -61,7 +61,7 @@
 
 .coach-card-pic {
   width: 100%;
-  height: 20vh;
+  height: 30vh;
 }
 
 .search-profile-div img {
@@ -77,7 +77,7 @@
   position: absolute;
   /* margin-top: -5%;*/
   margin-bottom: 3%;
-  margin-left: 27%;
+  margin-left: 7vw;
   bottom: 0;
 }
 
@@ -113,15 +113,32 @@
   width: 17vw;
   border: solid;
   border-width: 0.1vw;
-  background-color: grey;
+  background-color: rgb(68, 78, 177);
   overflow: hidden;
   height: 90%;
   z-index: 10;
+  /* background: url("https://images-na.ssl-images-amazon.com/images/I/71lx55mPL9L._SY879_.jpg"); */
+  opacity: 0.8;
 }
 
 .conversationsList div {
   padding-bottom: 2%;
   padding-top: 2%;
+}
+
+.convo-title {
+  background-color: "white";
+  border: "1px solid black";
+  border-radius: "25px";
+  padding: "5px";
+  box-shadow: "0 6px grey";
+}
+
+.convo-title:hover {
+  /* box-shadow: 0 5px grey;
+  transform: translateY(4px); */
+  cursor: pointer;
+  background-color: gray;
 }
 
 .conversationApp {
@@ -143,7 +160,7 @@
 
 .messagesAreaInside {
   /* text-align: center; */
-  background-color: grey;
+  background-color: rgb(74, 86, 194);
   position: relative;
 }
 
@@ -162,9 +179,10 @@
   border: solid;
   border-width: 0.1vw;
   height: 45%;
-  background-color: grey;
+  background-color: rgb(74, 86, 194);
   border-radius: 0.5vw;
   z-index: 10;
+  opacity: 0.9;
   /* text-align: center; */
 }
 
@@ -179,7 +197,7 @@
 }
 
 .chat-title {
-  background-color: grey;
+  background-color: rgb(74, 86, 194);
   border-radius: 0.5vw;
   height: auto;
   min-height: 6vh;

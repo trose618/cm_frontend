@@ -140,8 +140,11 @@ const mapConversations = (conversations, handleClick) => {
         key={conversation.id}
         className=""
         onClick={() => handleClick(conversation.id)}
+        style={{ marginBottom: "1vh" }}
       >
-        {conversation.title}
+        <span className="convo-title" style={{ opacity: "1" }}>
+          {conversation.title}
+        </span>
       </div>
     );
   });
