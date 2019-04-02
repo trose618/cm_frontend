@@ -242,34 +242,29 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar>
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Open drawer"
             >
               <MenuIcon />
-            </IconButton>
-            <Typography
-              className={classes.title}
-              variant="h6"
-              color="inherit"
-              noWrap
-            >
-              <Badge>
-                <Link style={{}} to="/home">
-                  Coach-Me
-                </Link>
-              </Badge>
-              <Badge>-</Badge>
+            </IconButton> */}
 
-              <Badge>
-                <Link to="/coaches">Coaches</Link>
-              </Badge>
-              <Badge>-</Badge>
-              <Badge badgeContent={pendingCount} color="secondary">
-                <Link to="/pendingLessons">Lessons</Link>
-              </Badge>
-            </Typography>
+            <Badge style={{ paddingRight: "1vw" }}>
+              <Link style={{}} to="/profile">
+                Coach-Me
+                </Link>
+            </Badge>
+
+
+            <Badge style={{ paddingRight: "1vw" }}>
+              <Link to="/coaches">Coaches</Link>
+            </Badge>
+
+            <Badge badgeContent={pendingCount} color="secondary" style={{ paddingRight: "1vw" }}>
+              <Link to="/pendingLessons">Lessons</Link>
+            </Badge>
+
             {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -287,6 +282,11 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.sectionDesktop}>
               {localStorage.getItem("token") ? (
                 <div>
+                  {this.props.currentUser ? <Badge>
+                    <Link style={{}} to="/profile">
+                      {this.props.currentUser.username}
+                    </Link>
+                  </Badge> : null}
                   <IconButton
                     color="inherit"
                     onClick={this.handleMessagesClick}
@@ -306,11 +306,11 @@ class PrimarySearchAppBar extends React.Component {
                   </IconButton>
                 </div>
               ) : (
-                <Fragment>
-                  <Link to={"/signUp"}>Sign Up</Link>
-                  <Link to={"/login"}>Login</Link>
-                </Fragment>
-              )}
+                  <Fragment>
+                    <Link to={"/signUp"}>Sign Up</Link>
+                    <Link to={"/login"}>Login</Link>
+                  </Fragment>
+                )}
             </div>
             <div className={classes.sectionMobile}>
               {localStorage.getItem("token") ? (
@@ -322,11 +322,11 @@ class PrimarySearchAppBar extends React.Component {
                   <MoreIcon />
                 </IconButton>
               ) : (
-                <Fragment>
-                  <Link to={"/signUp"}>Sign Up</Link>
-                  <Link to={"/login"}>Login</Link>
-                </Fragment>
-              )}
+                  <Fragment>
+                    <Link to={"/signUp"}>Sign Up</Link>
+                    <Link to={"/login"}>Login</Link>
+                  </Fragment>
+                )}
             </div>
           </Toolbar>
         </AppBar>

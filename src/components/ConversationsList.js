@@ -9,6 +9,9 @@ import ChatConnection from "./ChatConnection";
 
 class ConversationsList extends React.Component {
   componentDidMount() {
+    if (this.connection) {
+      this.connection.disconnect();
+    }
     const that = this;
     this.connection = new ChatConnection(
       that.props.user.id,
@@ -38,6 +41,10 @@ class ConversationsList extends React.Component {
   handleClick = id => {
     this.props.handleClick(id);
   };
+
+  componentWillUnmount() {
+    this.connection.disconnect();
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeConversation === false) {

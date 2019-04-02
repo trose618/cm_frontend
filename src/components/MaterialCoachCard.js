@@ -32,7 +32,7 @@ function MaterialCoachCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         {/* <CardMedia
           className={classes.media}
           image={props.coach.image_url ? props.coach.image_url : default_image}
@@ -51,14 +51,19 @@ function MaterialCoachCard(props) {
           <Typography component="p">{props.coach.bio}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={handleClick}>
+      {/* <CardActions>
+         <Button size="small" color="primary" onClick={handleClick}>
           Profile
         </Button>
+
         <Button size="small" color="primary">
-          Learn More
+          Message
         </Button>
-      </CardActions>
+
+        <Button size="small" color="primary">
+          Lesson
+        </Button> 
+      </CardActions> */}
     </Card>
   );
 }

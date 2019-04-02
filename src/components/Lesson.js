@@ -86,36 +86,36 @@ class Lesson extends Component {
             {this.props.client ? (
               <div>
                 {this.props.lesson.accepted === true &&
-                this.props.lesson.checked !== true ? (
-                  <div className="ui button" onClick={this.handleConfirm}>
-                    Confirm Lesson
+                  this.props.lesson.checked !== true ? (
+                    <div className="ui button" onClick={this.handleConfirm}>
+                      Confirm Lesson
                   </div>
-                ) : null}
+                  ) : null}
               </div>
             ) : (
-              <div>
-                {this.props.lesson.accepted !== true ? (
-                  <div>
-                    <div
-                      className="ui button accept-decline-buttons"
-                      onClick={this.handleAccept}
-                    >
-                      Accept Lesson
+                <div>
+                  {this.props.lesson.accepted !== true ? (
+                    <div>
+                      <div
+                        className="ui button accept-decline-buttons"
+                        onClick={this.handleAccept}
+                      >
+                        Accept Lesson
                     </div>
-                    <div
-                      className="ui button accept-decline-buttons"
-                      onClick={this.handleDecline}
-                    >
-                      Decline Lesson
+                      <div
+                        className="ui button accept-decline-buttons"
+                        onClick={this.handleDecline}
+                      >
+                        Decline Lesson
                     </div>
+                    </div>
+                  ) : (
+                      <div className="ui button" onClick={this.handleDecline}>
+                        Cancel Lesson
                   </div>
-                ) : (
-                  <div className="ui button" onClick={this.handleDecline}>
-                    Cancel Lesson
-                  </div>
-                )}
-              </div>
-            )}
+                    )}
+                </div>
+              )}
           </div>
         </div>
       </div>

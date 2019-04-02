@@ -37,7 +37,7 @@ class SimpleModal extends React.Component {
     lesson_date: new Date(),
     client_age: "",
     client_email: "",
-    client_level: "",
+    client_level: 2.0,
     client_name: "",
     lesson_focus: ""
   };
@@ -108,6 +108,8 @@ class SimpleModal extends React.Component {
             <br />
             Experience Level
             <select name="client_level" onChange={this.handleFormInput}>
+              <option>2.0</option>
+              <option>2.5</option>
               <option>3.0</option>
               <option>3.5</option>
               <option>4.0</option>
