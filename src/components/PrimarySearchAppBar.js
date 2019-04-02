@@ -307,7 +307,7 @@ class PrimarySearchAppBar extends React.Component {
                 </div>
               ) : (
                   <Fragment>
-                    <Link to={"/signUp"}>Sign Up</Link>
+                    <Link to={"/signUp"} style={{ paddingRight: "1vw" }}>Sign Up</Link>
                     <Link to={"/login"}>Login</Link>
                   </Fragment>
                 )}

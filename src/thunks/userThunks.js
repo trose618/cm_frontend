@@ -1,7 +1,7 @@
 import { API_ROOT } from "../constants";
 
 export const handleLogin = (user, path) => {
-  return function(dispatch) {
+  return function (dispatch) {
     //alert(`http://localhost:3000/api/v1/${path}`);
     return fetch(`http://localhost:3000/api/v1/${path}`, {
       method: "POST",
@@ -22,6 +22,7 @@ export const handleLogin = (user, path) => {
 };
 
 export const handleNewLesson = (coach_id, client_id, coach_name, lesson) => {
+
   return dispatch => {
     return fetch("http://localhost:3000/api/v1/lessons", {
       method: "POST",

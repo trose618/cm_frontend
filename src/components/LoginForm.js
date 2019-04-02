@@ -31,7 +31,7 @@ class LoginForm extends Component {
       <div
         style={{ width: "50%", marginTop: "20%", height: "auto" }}
         className="ui form segment raised"
-      >
+      > <h1>Welcome to Coach Me</h1>
         <form onSubmit={this.handleSubmit}>
           Coach Me Login
           <input

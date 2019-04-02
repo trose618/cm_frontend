@@ -31,14 +31,16 @@ class Calendar extends Component {
             .split(/[\-T:]+/)
             .map(digit => parseInt(digit));
 
+          let correctedHour = date[3] - 4
+
           return {
             title: `Lesson for ${lesson.client_name}`,
-            start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
+            start: new Date(date[0], date[1] - 1, date[2], correctedHour, date[4], 0),
             end: new Date(
               date[0],
               date[1] - 1,
               date[2],
-              date[3] + 1,
+              correctedHour + 1,
               date[4],
               0
             ),
@@ -57,11 +59,13 @@ class Calendar extends Component {
         let date = lesson.lesson_date
           .split(/[\-T:]+/)
           .map(digit => parseInt(digit));
-        console.log(date[2], date[2] + 1);
+        console.log("checking hour of lesson", date[3] - 4);// checking the day of month
+        console.log(new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0));
+        let correctedHour = date[3] - 4
         return {
           title: `${lesson.client_name}'s lesson`,
-          start: new Date(date[0], date[1] - 1, date[2], date[3], date[4], 0),
-          end: new Date(date[0], date[1] - 1, date[2], date[3] + 1, date[4], 0),
+          start: new Date(date[0], date[1] - 1, date[2], correctedHour, date[4], 0),
+          end: new Date(date[0], date[1] - 1, date[2], correctedHour + 1, date[4], 0),
           desc: lesson.lesson_focus
         };
       });
@@ -80,7 +84,7 @@ class Calendar extends Component {
         <header className="Calendarheader">
           <h1 className="Calendar-title">{`${
             this.props.user.username
-          }'s Calendar`}</h1>
+            }'s Calendar`}</h1>
         </header>
         <div style={{ height: 700 }}>
           <BigCalendar

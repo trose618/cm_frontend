@@ -55,6 +55,7 @@ class SimpleModal extends React.Component {
     if (state.client_name.length < 2) {
     } else {
       alert("Lesson booked!");
+
       this.setState({ open: false });
       this.props.handleFormSubmit(
         this.props.coach_id,
@@ -65,6 +66,7 @@ class SimpleModal extends React.Component {
     }
   };
 
+  //fix edge case for setting lesson to 11pm or later
   onChange = date => {
     console.log(date);
     this.setState({ lesson_date: date });
@@ -174,7 +176,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(handleNewLesson(coach, client, coach_name, lesson))
         .then(res => res.json())
         .then(lesson => {
-          console.log("being reached");
+          console.log("being reached", lesson);
           dispatch(submitLesson(lesson));
         })
     //lesson => submitLesson(lesson)

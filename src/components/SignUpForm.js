@@ -32,7 +32,7 @@ class SignUpForm extends Component {
         className="ui form segment raised"
       >
         <form onSubmit={this.handleSubmit}>
-          Coach Me SignUp
+          <h1>Coach Me SignUp</h1>
           <input
             type="text"
             placeholder="Enter username"

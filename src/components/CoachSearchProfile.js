@@ -11,11 +11,11 @@ class CoachSearchProfile extends React.Component {
     if (
       convo_names.includes(
         `convo between ${this.props.coach.username} and ${
-          this.props.currentUser.username
+        this.props.currentUser.username
         }`
       )
     ) {
-      alert("convo already exists");
+
       this.props.handleToggleChat();
     } else {
       this.props.messageCoach(
@@ -65,11 +65,13 @@ const mapDispatchToProps = dispatch => {
     messageCoach: (client_id, coach_id, coach_name, user_name) => {
       dispatch(startConvo(client_id, coach_id, coach_name, user_name)).then(
         data => {
+          console.log(data)
           if (data.conversation) {
-            alert("new convo!");
+            console.log("new convo")
+            dispatch({ type: "RECEIVED_CONVO", payload: data.conversation })
             dispatch({ type: "TOGGLE_CHAT", payload: true });
           } else {
-            alert("already have an existing chat with this coach");
+            console.log("already have existing convo with this person")
           }
         }
       );

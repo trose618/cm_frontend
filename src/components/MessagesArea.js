@@ -18,7 +18,7 @@ const MessagesArea = ({
         <h3>{title}</h3>
       </div>
       <div className="messagesdisplay">
-        <div>{orderedMessages(messages, userId)} </div>
+        <div>{messages ? orderedMessages(messages, userId) : null} </div>
       </div>
 
       <div className="new-message-form">
@@ -53,9 +53,15 @@ const formattedTime = datetime => {
 };
 
 const orderedMessages = (messages, userId) => {
-  const sortedMessages = messages.sort(
-    (a, b) => new Date(a.created_at) - new Date(b.created_at)
-  );
+  let sortedMessages = messages
+
+  console.log(sortedMessages);
+
+  if (sortedMessages) {
+    sortedMessages = messages.sort(
+      (a, b) => new Date(a.created_at) - new Date(b.created_at)
+    );
+  }
   return sortedMessages.map(message => {
     return (
       <div className="message" key={message.id * Math.random() * 100}>

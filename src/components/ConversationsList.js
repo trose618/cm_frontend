@@ -82,6 +82,11 @@ class ConversationsList extends React.Component {
       conversation => conversation.id === response.room_id
     );
 
+    //for some reason, newly created convos don't come with .messages defined, 
+    //only after reloading the page
+    if (!conversation.messages) {
+      conversation.messages = []
+    }
     conversation.messages = [
       ...conversation.messages,
       {
@@ -135,6 +140,7 @@ class ConversationsList extends React.Component {
 // helpers
 
 const findActiveConversation = (conversations, activeConversation) => {
+
   return conversations.find(
     conversation => conversation.id === activeConversation
   );
