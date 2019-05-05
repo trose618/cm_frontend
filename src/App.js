@@ -24,6 +24,7 @@ import ActionCable from "actioncable";
 import { ActionCableProvider } from "react-actioncable-provider";
 import { API_WS_ROOT } from "./constants";
 import ChatConnection from "./components/ChatConnection";
+import NavBar from "./components/NavBar";
 
 class App extends Component {
   componentDidMount() {
@@ -56,13 +57,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="nav-bar">
-          <PrimarySearchAppBar />
+          {/* <PrimarySearchAppBar /> */}
+          <NavBar />
         </div>
         <div className="main-display-div">
           {!localStorage.getItem("token") ? null : this.props
-              .toggleChatInterface ? (
-            <ConversationApp />
-          ) : null}
+            .toggleChatInterface ? (
+              <ConversationApp />
+            ) : null}
 
           <Switch>
             <Route path="/calendar" component={Calendar} />
@@ -82,8 +84,8 @@ class App extends Component {
                 return localStorage.getItem("token") ? (
                   <UserProfile />
                 ) : (
-                  <Redirect to="/login" />
-                );
+                    <Redirect to="/login" />
+                  );
               }}
             />
             <Route
@@ -92,10 +94,10 @@ class App extends Component {
                 return localStorage.getItem("token") ? (
                   <Redirect to="/profile" />
                 ) : (
-                  <div className="ui one column stackable center aligned page grid signUp">
-                    <LoginForm />
-                  </div>
-                );
+                    <div className="ui one column stackable center aligned page grid signUp">
+                      <LoginForm />
+                    </div>
+                  );
               }}
             />
             <Route
@@ -104,8 +106,8 @@ class App extends Component {
                 return this.props.selected_coach ? (
                   <CoachSearchProfile />
                 ) : (
-                  <Redirect to="/login" />
-                );
+                    <Redirect to="/login" />
+                  );
               }}
             />
             <Route
@@ -114,8 +116,8 @@ class App extends Component {
                 return localStorage.getItem("token") ? (
                   <PendingLessonsContainer />
                 ) : (
-                  <Redirect to="/login" />
-                );
+                    <Redirect to="/login" />
+                  );
               }}
             />
             <Route
@@ -124,8 +126,8 @@ class App extends Component {
                 return localStorage.getItem("token") ? (
                   <CoachContainer />
                 ) : (
-                  <Redirect to="/login" />
-                );
+                    <Redirect to="/login" />
+                  );
               }}
             />
             <Route
@@ -134,8 +136,8 @@ class App extends Component {
                 return localStorage.getItem("token") ? (
                   <EditProfile />
                 ) : (
-                  <Redirect to="/login" />
-                );
+                    <Redirect to="/login" />
+                  );
               }}
             />
 

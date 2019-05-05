@@ -31,7 +31,7 @@ class SignUpForm extends Component {
         style={{ width: "50%", marginTop: "20%", height: "auto" }}
         className="ui form segment raised"
       >
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} data-step="1" data-intro="User Guide">
           <h1>Coach Me SignUp</h1>
           <input
             type="text"
@@ -73,6 +73,10 @@ class SignUpForm extends Component {
             Not a certified coach?
           </a>
         </form>
+        <br />
+        <div>
+          <a class="demo-button" href="javascript:introJs().setOption('showProgress', true).start();">Demo</a>
+        </div>
       </div>
     );
   }
@@ -85,6 +89,7 @@ const mapDispatchToProps = dispatch => {
         .then(res => res.json())
         .then(data => {
           if (!data.user) {
+
             alert(data.error);
           } else {
             console.log(data.user);

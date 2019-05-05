@@ -17,6 +17,130 @@
   top: 0;
   z-index: 12;
 }
+
+.main-nav-div {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  border: solid;
+  border-width: 0.1vh;
+  padding-bottom: 0.5vh;
+  z-index: 1000;
+  height: 60px;
+  
+}
+
+.nav-left {
+  text-align: left;
+  padding-left: 5vw;
+  width: 50%;
+  display: inline-block;
+  padding-top: 20px;
+}
+
+.nav-left a {
+  
+  color: white;
+  font-family: cursive;
+  font-size: 25px;
+  padding-right: 3vw;
+  text-decoration: none; /*removed underline*/
+  
+}
+
+.nav-left a:hover {
+  color: yellow;
+}
+
+.nav-right {
+  display: inline-block;
+  text-align: right;
+  width:40%;
+}
+
+.nav-right a {
+  color: white;
+  padding-right: 1.5vw;
+  font-size: 25px;
+}
+
+.nav-right a:hover{
+  color: yellow;
+}
+
+.nav-right i {
+  font-size: 30px;
+}
+.main-menubox-div {
+  border: solid;
+  border-width: 0.1vw;
+  border-radius: 0.5vw;
+  width: fit-content;
+  height: auto;
+  background-color: bisque;
+  position: absolute;
+  right:0;
+}
+
+.main-menubox-div a {
+  text-decoration: none;
+  font-family: cursive;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  color: black;
+  font-size: 3vh;
+  
+}
+
+.main-menubox-div hr {
+  margin: 0px;
+}
+
+.main-menubox-div a:hover {
+  color: blue;
+}
+
+.menu {
+  color: white;
+  /* padding-right: 1.0vw; */
+  /* padding-left: 1.0vw; */
+  font-size: 1.5em;
+  width: 50px;
+}
+
+.menu:hover {
+  color: grey;
+}
+
+.icon-div {
+  display: inline-block;
+  position: relative;
+}
+
+.lesson-alert {
+  color: red;
+  font-size: 20px;
+  border: solid;
+  border-width: 0.1vw;
+  border-radius: 1vw;
+  position: absolute;
+  bottom: 1vh;
+}
+
+.message-alert {
+  color: red;
+  font-size: 0.8vw;
+  border: solid;
+  border-width: 0.1vw;
+  border-radius: 1vw;
+  position: absolute;
+  bottom: 1.7vh;
+  right: 1.9vw;
+}
+
 .signUp {
   position: relative;
   margin-top: 50%;
@@ -40,7 +164,7 @@
   /* position: relative; */
 
   background-color: blanchedalmond;
-  margin-top: 63px;
+  margin-top: 60px;
   margin-left: 15%;
   margin-right: 15%;
   min-height: 100vh;
@@ -288,4 +412,8 @@ a {
 }
 a:hover {
   color: #00f;
+}
+
+.demo-button {
+  
 }
