@@ -62,27 +62,27 @@ class NavBar extends Component {
                     {loggedIn ? (<div className="nav-right">
 
                         <a href="/profile">{this.props.currentUser.username}</a>
-                        <a>
-                            <span style={{ position: "relative" }}>
-                                <i className="fas fa-comment-dots menu" onClick={this.handleMessagesClick}></i>
 
-                                {/* do this when you figure out new messages <i className="fas fa-exclamation message-alert"></i> */}
-                            </span>
-                        </a>
-                        <a>
-                            <div className="icon-div" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-                                <i className="fas fa-user menu" onClick={this.handleMenuClick}></i>
-                                <div style={this.state.openMenu ? ({ display: "block" }) : ({ display: "none" })}>
-                                    <div className="main-menubox-div">
-                                        <a href="profile">My Profile</a>
-                                        <hr />
-                                        <a href="editProfile">Settings</a>
-                                        <hr />
-                                        <a href="login" onClick={this.handleLogout}>Sign Out</a>
-                                    </div>
+                        <span style={{ position: "relative" }}>
+                            <i className="fas fa-comment-dots menu" onClick={this.handleMessagesClick}></i>
+
+                            {/* do this when you figure out new messages <i className="fas fa-exclamation message-alert"></i> */}
+                        </span>
+
+
+                        <span className="icon-div" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                            <i className="fas fa-user menu" onClick={this.handleMenuClick}></i>
+                            <div style={this.state.openMenu ? ({ display: "block" }) : ({ display: "none" })}>
+                                <div className="main-menubox-div">
+                                    <a href="profile">My Profile</a>
+                                    <hr />
+                                    <a href="editProfile">Settings</a>
+                                    <hr />
+                                    <a href="login" onClick={this.handleLogout}>Sign Out</a>
                                 </div>
                             </div>
-                        </a>
+                        </span>
+
 
                     </div>) : (<div className="nav-right"><a href="/signup"><span>Sign Up</span></a><a href="/login"><span>Log In</span></a></div>)}
                 </div>

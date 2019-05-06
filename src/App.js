@@ -141,7 +141,13 @@ class App extends Component {
               }}
             />
 
-            <Route path="/" component={HomePage} />
+            <Route path="/"
+              render={() => {
+                return localStorage.getItem("token") ? (
+                  <UserProfile />
+                ) : (
+                    <Redirect to="/login" />)
+              }} />
           </Switch>
         </div>
       </div>
