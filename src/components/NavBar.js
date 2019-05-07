@@ -7,7 +7,6 @@ class NavBar extends Component {
     state = {
         signedInUser: false,
         lessonAlert: false,
-        messageAlert: false,
         openMenu: false
     }
 
@@ -36,6 +35,7 @@ class NavBar extends Component {
 
     render() {
 
+        // variable checked to determine what components to display
         const loggedIn = !!this.props.currentUser
 
         const pendingLessons = this.props.lessons.filter(lesson => {
@@ -45,7 +45,7 @@ class NavBar extends Component {
                 return lesson.accepted === false;
             }
         });
-
+        // variable used to check if action is required regarding a lesson
         const pendingCount = pendingLessons.length;
 
         return (
@@ -66,7 +66,7 @@ class NavBar extends Component {
                         <span style={{ position: "relative" }}>
                             <i className="fas fa-comment-dots menu" onClick={this.handleMessagesClick}></i>
 
-                            {/* do this when you figure out new messages <i className="fas fa-exclamation message-alert"></i> */}
+                            {/* do this when you figure out new messages channel in ruby <i className="fas fa-exclamation message-alert"></i> */}
                         </span>
 
 
@@ -93,8 +93,6 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => {
-    //console.log(state);
-    console.log(state);
     return state;
 };
 

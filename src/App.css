@@ -22,7 +22,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: blue;
+  background-color: rgb(68, 78, 177);
   border: solid;
   border-width: 0.1vh;
   padding-bottom: 0.5vh;
@@ -199,10 +199,10 @@
 
 .image-edit-button {
   position: absolute;
-  /* margin-top: -5%;*/
   margin-bottom: 3%;
-  margin-left: 7vw;
+  margin-left: 40%;
   bottom: 0;
+  text-align: center;
 }
 
 .edit-profile-info {

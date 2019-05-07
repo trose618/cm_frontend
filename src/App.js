@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import SignUpForm from "./components/SignUpForm";
-import PrimarySearchAppBar from "./components/PrimarySearchAppBar";
 import LoginForm from "./components/LoginForm";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./components/UserProfile";
-import HomePage from "./components/HomePage";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./actions/userActions";
 import { getCoaches } from "./thunks/coachThunks";
@@ -13,17 +11,11 @@ import { getLessons } from "./thunks/lessonThunks";
 import { getConvos } from "./thunks/userThunks";
 import { getConfirmedLessons } from "./thunks/lessonThunks";
 import CoachSearchProfile from "./components/CoachSearchProfile";
-
 import CoachContainer from "./components/CoachContainer";
 import PendingLessonsContainer from "./components/PendingLessonsContainer";
 import EditProfile from "./components/EditProfile";
 import ConversationApp from "./components/ConversationApp";
 import Calendar from "./components/Calendar";
-
-import ActionCable from "actioncable";
-import { ActionCableProvider } from "react-actioncable-provider";
-import { API_WS_ROOT } from "./constants";
-import ChatConnection from "./components/ChatConnection";
 import NavBar from "./components/NavBar";
 
 class App extends Component {

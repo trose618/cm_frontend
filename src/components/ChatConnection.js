@@ -12,7 +12,8 @@ function ChatConnection(senderId, callback) {
   this.roomConnections = [];
 }
 
-ChatConnection.prototype.talk = function(message, roomId) {
+//
+ChatConnection.prototype.talk = function (message, roomId) {
   console.log("room id", roomId);
 
   let roomConnObj = this.roomConnections.find(conn => {
@@ -25,7 +26,8 @@ ChatConnection.prototype.talk = function(message, roomId) {
   }
 };
 
-ChatConnection.prototype.openNewRoom = function(roomId) {
+//connects to chat room at specific id
+ChatConnection.prototype.openNewRoom = function (roomId) {
   if (roomId !== undefined) {
     this.roomConnections.push({
       roomId: roomId,
@@ -34,19 +36,20 @@ ChatConnection.prototype.openNewRoom = function(roomId) {
   }
 };
 
-ChatConnection.prototype.disconnect = function() {
+ChatConnection.prototype.disconnect = function () {
   this.roomConnections.forEach(c => c.conn.consumer.connection.close());
 };
 
-ChatConnection.prototype.createRoomConnection = function(room_code) {
+//Helper method for openNewRoom function
+ChatConnection.prototype.createRoomConnection = function (room_code) {
   var scope = this;
   return this.connection.subscriptions.create(
     { channel: "RoomChannel", room_id: room_code, senderId: scope.sender },
     {
-      connected: function() {
+      connected: function () {
         console.log("connected to RoomChannel. Room code: " + room_code + ".");
       },
-      disconnected: function() {},
+      disconnected: function () { },
 
       received: data => {
         console.log(data);
@@ -54,7 +57,7 @@ ChatConnection.prototype.createRoomConnection = function(room_code) {
           return scope.callback(data);
         }
       },
-      speak: function(message) {
+      speak: function (message) {
         return this.perform("speak", {
           room_id: room_code,
           message: message,
