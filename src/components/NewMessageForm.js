@@ -1,5 +1,4 @@
 import React from "react";
-import { API_ROOT, HEADERS } from "../constants";
 
 class NewMessageForm extends React.Component {
   state = {
@@ -15,7 +14,6 @@ class NewMessageForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
     this.props.handleSendMessage(this.state.text);
     this.setState({ text: "" });
   };
