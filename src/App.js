@@ -53,10 +53,8 @@ class App extends Component {
           <NavBar />
         </div>
         <div className="main-display-div">
-          {!localStorage.getItem("token") ? null : this.props
-            .toggleChatInterface ? (
-              <ConversationApp />
-            ) : null}
+          {localStorage.getItem("token") && this.props
+            .toggleChatInterface ? <ConversationApp /> : null}
 
           <Switch>
             <Route path="/calendar" component={Calendar} />

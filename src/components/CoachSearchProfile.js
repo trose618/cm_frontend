@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => {
             dispatch({ type: "RECEIVED_CONVO", payload: data.conversation })
             dispatch({ type: "TOGGLE_CHAT", payload: true });
           } else {
-            console.log("already have existing convo with this person")
+            alert("already have existing convo with this person")
           }
         }
       );

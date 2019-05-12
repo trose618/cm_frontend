@@ -1,28 +1,27 @@
 import React from "react";
-import { ActionCableConsumer } from "react-actioncable-provider";
 import MessagesArea from "./MessagesArea";
 import { connect } from "react-redux";
 import { getConvos } from "../thunks/userThunks";
-import ChatConnection from "./ChatConnection";
+// import ChatConnection from "./ChatConnection";
 
 // let connection = new ChatConnection(1, handleReceivedMessage);
 
 class ConversationsList extends React.Component {
   componentDidMount() {
-    if (this.connection) {
-      this.connection.disconnect();
-    }
-    const that = this;
-    this.connection = new ChatConnection(
-      that.props.user.id,
-      that.handleReceivedMessage
-    );
-    // this.connection.senderId = this.props.user.id;
-    // this.connection.callback = this.handleData;
+    // if (this.connection) {
+    //   this.connection.disconnect();
+    // }
+    // const that = this;
+    // this.connection = new ChatConnection(
+    //   that.props.user.id,
+    //   that.handleReceivedMessage
+    // );
+    // // this.connection.senderId = this.props.user.id;
+    // // this.connection.callback = this.handleData;
 
-    if (this.props.activeConversation !== false) {
-      this.connection.openNewRoom(this.props.activeConversation);
-    }
+    // if (this.props.activeConversation !== false) {
+    //   this.connection.openNewRoom(this.props.activeConversation);
+    // }
   }
 
   handleMessageReceived = response => {
@@ -43,27 +42,27 @@ class ConversationsList extends React.Component {
   };
 
   componentWillUnmount() {
-    this.connection.disconnect();
+    // this.connection.disconnect();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.activeConversation === false) {
-      this.connection.disconnect();
-    } else if (!this.props.activeConversation) {
-      if (nextProps.activeConversation) {
-        console.log("no previous opened convo, but opening convo");
+    // if (nextProps.activeConversation === false) {
+    //   this.connection.disconnect();
+    // } else if (!this.props.activeConversation) {
+    //   if (nextProps.activeConversation) {
+    //     console.log("no previous opened convo, but opening convo");
 
-        this.connection.openNewRoom(nextProps.activeConversation);
-      }
-    } else if (this.props.activeConversation) {
-      if (nextProps.activeConversation) {
-        console.log("if switching between convos");
-        let rooms = this.connection.roomConnections.map(room => room.roomId);
-        if (!rooms.includes(nextProps.activeConversation)) {
-          this.connection.openNewRoom(nextProps.activeConversation);
-        }
-      }
-    }
+    //     this.connection.openNewRoom(nextProps.activeConversation);
+    //   }
+    // } else if (this.props.activeConversation) {
+    //   if (nextProps.activeConversation) {
+    //     console.log("if switching between convos");
+    //     let rooms = this.connection.roomConnections.map(room => room.roomId);
+    //     if (!rooms.includes(nextProps.activeConversation)) {
+    //       this.connection.openNewRoom(nextProps.activeConversation);
+    //     }
+    //   }
+    // }
   }
 
   handleReceivedConversation = response => {
@@ -101,9 +100,9 @@ class ConversationsList extends React.Component {
     this.props.handleReceivedMessage(conversations);
   };
 
-  sendMessage = message => {
-    this.connection.talk(message, this.props.activeConversation);
-  };
+  // sendMessage = message => {
+  //   this.connection.talk(message, this.props.activeConversation);
+  // };
 
   render = () => {
     const { conversations, activeConversation } = this.props;

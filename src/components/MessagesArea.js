@@ -1,42 +1,100 @@
 import React from "react";
 import NewMessageForm from "./NewMessageForm";
 import { connect } from "react-redux";
+import ActionCable from "actioncable"
+import ChatConnection from "./ChatConnection";
 
-const MessagesArea = ({
-  conversation: { id, title },
-  userId,
-  messages,
-  closeConvo,
-  handleSendMessage
-}) => {
-  return (
-    <div className="messagesAreaInside">
-      <span className="close-convo-button" onClick={closeConvo}>
-        x
-      </span>
-      <div className="chat-title">
-        <h3>{title}</h3>
-      </div>
-      <div className="messagesdisplay">
-        <div>{messages ? orderedMessages(messages, userId) : null} </div>
-      </div>
+//this component displays actual chat box with a conversation.
+//should create the socket connection
+class MessagesArea extends React.Component {
 
-      <div className="new-message-form">
-        <NewMessageForm
-          handleSendMessage={handleSendMessage}
-          conversation_id={id}
-          user_id={userId}
-        />
+  handleCloseConvo = () => {
+    this.props.handleClick(false)
+  }
+
+  handleSendMessage = message => {
+
+    alert(message)
+  }
+
+  handleReceivedMessages = () => {
+    alert("message received")
+  }
+
+  componentDidMount() {
+
+    //if there is an active conversation, create a connection to channel
+    if (this.props.activeConversation !== false) {
+      this.connection = new ChatConnection(this.props.userId, this.handleReceivedMessages)
+      this.connection.openNewRoom(this.props.activeConversation)
+      // debugger;
+    }
+  }
+
+  componentWillUnmount() {
+    // alert("closing chat")
+
+    this.connection.disconnect();
+    // this.connection = null;
+    debugger;
+  }
+
+
+
+
+  render() {
+
+    //stopped using closeConvo function passed down from parent component
+    const {
+      conversation: { id, title },
+      userId,
+      messages,
+      closeConvo,
+      handleSendMessage
+    } = this.props;
+
+    return (
+      <div className="messagesAreaInside">
+        <span className="close-convo-button" onClick={this.handleCloseConvo}>
+          x
+          </span>
+        <div className="chat-title">
+          <h3>{title}</h3>
+        </div>
+        <div className="messagesdisplay">
+          <div>{messages ? orderedMessages(messages, userId) : null} </div>
+        </div>
+
+        <div className="new-message-form">
+          <NewMessageForm
+            handleSendMessage={this.handleSendMessage}
+            conversation_id={id}
+            user_id={userId}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+
+  }
+}
+
 
 const mapStateToProps = state => {
-  return { userId: state.currentUser.id };
+  return {
+    userId: state.currentUser.id,
+    activeConversation: state.activeConversation
+  };
 };
 
-export default connect(mapStateToProps)(MessagesArea);
+const mapDispatchToProps = dispatch => {
+  return {
+    handleClick: id => {
+      dispatch({ type: "SET_CURRENT_CONVO", payload: id });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessagesArea);
 
 // helpers
 

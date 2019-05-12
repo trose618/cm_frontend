@@ -28,7 +28,9 @@ ChatConnection.prototype.talk = function (message, roomId) {
 
 //connects to chat room at specific id
 ChatConnection.prototype.openNewRoom = function (roomId) {
-  if (roomId !== undefined) {
+  alert(`room id: ${roomId}`)
+  if (roomId !== false) {
+    alert(`connection beign establish. Room: ${roomId}`)
     this.roomConnections.push({
       roomId: roomId,
       conn: this.createRoomConnection(roomId)
@@ -49,7 +51,9 @@ ChatConnection.prototype.createRoomConnection = function (room_code) {
       connected: function () {
         console.log("connected to RoomChannel. Room code: " + room_code + ".");
       },
-      disconnected: function () { },
+      disconnected: function () {
+        console.log("disconnecting");
+      },
 
       received: data => {
         console.log(data);
