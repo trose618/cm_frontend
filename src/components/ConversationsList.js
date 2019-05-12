@@ -44,6 +44,7 @@ class ConversationsList extends React.Component {
 
   componentWillUnmount() {
     this.connection.disconnect();
+    this.connection = null;
   }
 
   componentWillReceiveProps(nextProps) {

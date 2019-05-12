@@ -141,6 +141,14 @@
   right: 1.9vw;
 }
 
+.login-title {
+  position: relative;
+  margin-top: 25%;
+
+  animation-name: moveInLeft;
+  animation-duration: 3s;
+}
+
 .signUp {
   position: relative;
   margin-top: 50%;
@@ -416,4 +424,16 @@ a:hover {
 
 .demo-button {
   
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px)
+  }
 }

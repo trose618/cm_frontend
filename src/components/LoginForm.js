@@ -28,30 +28,34 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div
-        style={{ width: "50%", marginTop: "20%", height: "auto" }}
-        className="ui form segment raised"
-      > <h1>Welcome to Coach Me</h1>
-        <form onSubmit={this.handleSubmit}>
-          Coach Me Login
+      <div style={{ width: "100%", height: "auto" }}>
+        <div className="login-title"><h1>Welcome to Coach Me</h1></div>
+
+        <div
+          style={{ width: "50%", height: "auto", display: "inline-block" }}
+          className="ui form segment raised"
+        >
+          <form onSubmit={this.handleSubmit}>
+            Coach Me Login
           <input
-            type="text"
-            placeholder="Enter username"
-            value={this.state.username}
-            name="username"
-            onChange={this.handleChange}
-          />
-          <br />
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleChange}
-          />
-          <br />
-          <input type="submit" value="Login" />
-        </form>
+              type="text"
+              placeholder="Enter username"
+              value={this.state.username}
+              name="username"
+              onChange={this.handleChange}
+            />
+            <br />
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={this.state.password}
+              name="password"
+              onChange={this.handleChange}
+            />
+            <br />
+            <input type="submit" value="Login" />
+          </form>
+        </div>
       </div>
     );
   }
