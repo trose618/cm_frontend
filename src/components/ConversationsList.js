@@ -11,6 +11,7 @@ class ConversationsList extends React.Component {
   componentDidMount() {
     if (this.connection) {
       this.connection.disconnect();
+      this.connection = null;
     }
     const that = this;
     this.connection = new ChatConnection(

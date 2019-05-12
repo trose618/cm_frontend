@@ -2,6 +2,8 @@ import React from "react";
 import NewMessageForm from "./NewMessageForm";
 import { connect } from "react-redux";
 
+//This component displays an actual chat.
+
 const MessagesArea = ({
   conversation: { id, title },
   userId,
