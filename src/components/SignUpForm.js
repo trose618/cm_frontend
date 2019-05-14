@@ -27,55 +27,53 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <div
-        style={{ width: "50%", marginTop: "20%", height: "auto" }}
-        className="ui form segment raised"
-      >
-        <form onSubmit={this.handleSubmit} data-step="1" data-intro="User Guide">
-          <h1>Coach Me SignUp</h1>
-          <input
-            type="text"
-            placeholder="Enter username"
-            value={this.state.username}
-            name="username"
-            onChange={this.handleChange}
-          />
+
+      <div style={{ width: "100%", height: "auto" }}>
+        <div className="signup-title"><h1>Coach Me SignUp</h1></div>
+        <div
+          style={{ width: "60%", height: "auto", display: "inline-block" }}
+          className="ui form segment raised"
+        >
+          <form className="cred-form" onSubmit={this.handleSubmit} data-step="1" data-intro="User Guide">
+
+            <input
+              type="text"
+              placeholder="Enter username"
+              value={this.state.username}
+              name="username"
+              onChange={this.handleChange}
+            />
+            <br />
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={this.state.password}
+              name="password"
+              onChange={this.handleChange}
+            />
+            <hr />
+            What kind of account are you signing up for?
           <br />
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleChange}
-          />
-          <hr />
-          What kind of account are you signing up for?
+            <input
+              type="radio"
+              name="client"
+              value={true}
+              onChange={this.handleChange}
+            />
+            Client
           <br />
-          <input
-            type="radio"
-            name="client"
-            value={true}
-            onChange={this.handleChange}
-          />
-          Client
+            <input
+              type="radio"
+              name="client"
+              value={false}
+              onChange={this.handleChange}
+            />
+            Coach
           <br />
-          <input
-            type="radio"
-            name="client"
-            value={false}
-            onChange={this.handleChange}
-          />
-          Coach
-          <br />
-          <input type="submit" value="SignUp" />
-          <br />
-          <a href="https://www.ussquash.com/coach/coach-certification/">
-            Not a certified coach?
-          </a>
-        </form>
-        <br />
-        <div>
-          <a class="demo-button" href="javascript:introJs().setOption('showProgress', true).start();">Demo</a>
+            <input className="cred-button" type="submit" value="SignUp" />
+
+          </form>
+
         </div>
       </div>
     );

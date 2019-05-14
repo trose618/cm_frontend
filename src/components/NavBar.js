@@ -58,6 +58,8 @@ class NavBar extends Component {
                         <span style={{ position: "relative" }}>
                             <a href="pendingLessons"><span>Lessons</span>{pendingCount ? (<i className="fas fa-exclamation lesson-alert"></i>) : null}</a>
                         </span>
+
+                        <a href="calendar"><span>Calendar</span></a>
                     </div>
                     {loggedIn ? (<div className="nav-right">
 

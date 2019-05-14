@@ -1,7 +1,14 @@
+body {
+  
+}
+
 .App {
   text-align: center;
   width: 100%;
-  background-color: silver;
+  background-image: url("https://5.imimg.com/data5/SC/MC/MY-17544340/squash-court-hard-plaster-500x500.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 100vh;
   height: auto;
 }
@@ -141,7 +148,7 @@
   right: 1.9vw;
 }
 
-.login-title {
+.login-title, .signup-title {
   position: relative;
   margin-top: 25%;
 
@@ -149,10 +156,17 @@
   animation-duration: 3s;
 }
 
+.cred-button:hover {
+  background: rgb(68, 78, 177);
+  color: #fff;
+}
+
 .signUp {
   position: relative;
   margin-top: 50%;
+  opacity: 1;
 }
+
 
 .coach-card {
   width: 50%;
@@ -171,11 +185,23 @@
 .main-display-div {
   /* position: relative; */
 
-  background-color: blanchedalmond;
+  background-color: rgb(255, 235, 205, 0.8);
   margin-top: 60px;
   margin-left: 15%;
   margin-right: 15%;
-  min-height: 100vh;
+  height: 90vh;
+  
+}
+
+.profile-lessons {
+  position: absolute;
+  right: 20%;
+  top:20%;
+}
+
+.profile-lessons-header {
+  font-size: 12pt;
+  
 }
 
 .profile-div {
@@ -202,7 +228,8 @@
 }
 
 .lesson-card {
-  width: 30%;
+  min-width: 280px;
+  width: 40%;
 }
 
 .image-edit-button {
@@ -242,7 +269,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
-  width: 17vw;
+  width: 15vw;
   border: solid;
   border-width: 0.1vw;
   background-color: rgb(68, 78, 177);
@@ -289,19 +316,10 @@
 .messagesDiv {
   position: relative;
 }
-
-.messageAreaTitleAndMessage {
-  /* text-align: center; */
-  /* position: relative; */
-}
-
 .messagesAreaInside {
   /* text-align: center; */
   background-color: rgb(74, 86, 194);
   position: relative;
-}
-
-.newMessageForm {
 }
 
 .newMessageForm textarea {
@@ -312,7 +330,7 @@
   position: fixed;
   right: 18%;
   bottom: 0;
-  width: 22vw;
+  width: 300px;
   border: solid;
   border-width: 0.1vw;
   height: 45%;
@@ -374,20 +392,12 @@
   padding-right: 0.5vw;
   overflow-wrap: break-word;
   /* border: solid; */
+  min-width: 60%;
   max-width: 18vw;
   font-size: 1.8vh;
   text-align: left;
   height: auto;
   border-radius: 10px;
-}
-
-.messagesdisplay ul {
-  /* overflow: hidden; */
-}
-
-.new-message-form {
-  /* position: absolute; */
-  /* bottom: 0; */
 }
 
 .Calendar {
@@ -406,13 +416,13 @@
 .lesson-card {
   padding-left: 0.5vw;
   padding-right: 0.5vw;
-  font-size: 1.5vh;
+  font-size: 8pt;
   display: inline-block;
   overflow: hidden;
 }
 
 .lesson-card h3 {
-  font-size: 2vh;
+  font-size: 12pt;
 }
 
 a {
@@ -420,10 +430,6 @@ a {
 }
 a:hover {
   color: #00f;
-}
-
-.demo-button {
-  
 }
 
 @keyframes moveInLeft {
@@ -435,5 +441,53 @@ a:hover {
   100% {
     opacity: 1;
     transform: translateX(0px)
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .conversationsList {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    border: solid;
+    border-width: 0.1vw;
+    background-color: rgb(68, 78, 177);
+    overflow: hidden;
+    height: 90%;
+    z-index: 10;
+    /* background: url("https://images-na.ssl-images-amazon.com/images/I/71lx55mPL9L._SY879_.jpg"); */
+    opacity: 0.8;
+  }
+
+  .close-convo-button {
+    position: absolute;
+    background-color: aliceblue;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .messagesArea {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    border: solid;
+    border-width: 0.1vw;
+    height: 45%;
+    background-color: rgb(74, 86, 194);
+    border-radius: 0.5vw;
+    z-index: 10;
+    opacity: 0.9;
+    /* text-align: center; */
+  }
+
+  .Calendar {
+    width: 100%;
+    height: auto;
+    background-color: rgb(218, 191, 131);
   }
 }

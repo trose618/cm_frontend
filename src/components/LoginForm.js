@@ -32,10 +32,10 @@ class LoginForm extends Component {
         <div className="login-title"><h1>Welcome to Coach Me</h1></div>
 
         <div
-          style={{ width: "50%", height: "auto", display: "inline-block" }}
+          style={{ width: "60%", height: "auto", display: "inline-block" }}
           className="ui form segment raised"
         >
-          <form onSubmit={this.handleSubmit}>
+          <form className="cred-form" onSubmit={this.handleSubmit}>
             Coach Me Login
           <input
               type="text"
@@ -53,7 +53,7 @@ class LoginForm extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <input type="submit" value="Login" />
+            <input className="cred-button" type="submit" value="Login" />
           </form>
         </div>
       </div>
