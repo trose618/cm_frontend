@@ -40,10 +40,8 @@ class App extends Component {
 
           const connection = ActionCable.createConsumer(
             `ws://localhost:3000/api/v1/cable?token=${access_token}`
-
           );
-
-          connection.subscriptions.create({ channel: "RoomChannel" })
+          connection.subscriptions.create({ channel: "LessonsChannel", room_id: this.props.currentUser.id })
         })
     }
   }
