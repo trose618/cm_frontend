@@ -17,6 +17,7 @@ import EditProfile from "./components/EditProfile";
 import ConversationApp from "./components/ConversationApp";
 import Calendar from "./components/Calendar";
 import NavBar from "./components/NavBar";
+import ActionCable from "actioncable";
 
 class App extends Component {
   componentDidMount() {
@@ -34,7 +35,16 @@ class App extends Component {
           this.props.handleMessagesReload();
           this.props.handleCoachReload();
           this.props.handleSetConfirmedLessons();
-        });
+        }).then(() => {
+          let access_token = localStorage.getItem("token");
+
+          const connection = ActionCable.createConsumer(
+            `ws://localhost:3000/api/v1/cable?token=${access_token}`
+
+          );
+
+          connection.subscriptions.create({ channel: "RoomChannel" })
+        })
     }
   }
 
