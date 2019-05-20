@@ -349,6 +349,7 @@ body {
   font-size: 2vw;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .chat-title {
