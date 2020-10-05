@@ -11,7 +11,7 @@
     "react": "^16.7.0",
     "react-actioncable-provider": "^2.0.0",
     "react-big-calendar": "^0.20.3",
-    "react-datetime-picker": "^2.1.1",
+    "react-datetime-picker": "^3.0.4",
     "react-dom": "^16.13.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.2.0",
