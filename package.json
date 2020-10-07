@@ -6,7 +6,7 @@
     "@material-ui/core": "^3.9.4",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.20.0",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "rc-time-picker": "^3.6.2",
     "react": "^16.13.1",
     "react-actioncable-provider": "^2.0.0",
