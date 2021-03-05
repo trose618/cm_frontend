@@ -10,7 +10,7 @@
     "rc-time-picker": "^3.6.2",
     "react": "^16.13.1",
     "react-actioncable-provider": "^2.0.0",
-    "react-big-calendar": "^0.28.0",
+    "react-big-calendar": "^0.33.1",
     "react-datetime-picker": "^3.0.4",
     "react-dom": "^16.13.0",
     "react-redux": "^6.0.1",
